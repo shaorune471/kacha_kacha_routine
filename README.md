@@ -275,3 +275,6 @@ DBはRailsで一般的に使われているPostgreSQLにしました。これな
 ライブラリはユーザー認証、タグ機能は一般的なものを、ページネーションは動作が早いpagyにしました。
 
 技術選定をするのが初めてなので、デザインを変更したい場合など修正箇所が多くならないか不安はあります。
+
+# 画面遷移図(Figma)
+https://www.figma.com/design/CgraLto8hKCLhKdOWYHbbX/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%EF%BC%9A%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=koSjGHIo3KhdUmnN-1
