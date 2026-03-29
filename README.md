@@ -278,3 +278,6 @@ DBはRailsで一般的に使われているPostgreSQLにしました。これな
 
 # 画面遷移図(Figma)
 https://www.figma.com/design/CgraLto8hKCLhKdOWYHbbX/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%EF%BC%9A%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=koSjGHIo3KhdUmnN-1
+
+# ER図(MVPリリース時点)
+![ER図](https://gyazo.com/3f10a34b06e1a970ff241d4367c9a4e5.png)
