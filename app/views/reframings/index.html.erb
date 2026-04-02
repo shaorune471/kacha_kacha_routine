@@ -1,0 +1,67 @@
+<div class="navbar bg-base-100 border-b border-base-200">
+  <div class="max-w-xl mx-auto w-full flex">
+    <div class="flex-1">
+      <span class="text-lg font-medium">カチャカチャルーティーン</span>
+    </div>
+  </div>
+</div>
+
+<div class="px-6 py-10 min-h-screen bg-base-200">
+  <div class="max-w-xl mx-auto">
+    <h1 class="text-lg font-medium mb-6">完璧主義のリフレーミング</h1>
+
+    <%# 完璧主義の強み %>
+    <div class="card bg-info/10 border border-info/30 mb-4">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-info uppercase tracking-widest mb-2">あなたの強み</p>
+        <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][0][:title] %></h2>
+        <p class="text-sm text-base-content/70 leading-relaxed"><%= @message[:sections][0][:body] %></p>
+      </div>
+    </div>
+
+    <%# 完璧主義の利点 %>
+    <div class="card bg-info/10 border border-info/30 mb-4">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-info uppercase tracking-widest mb-2">習慣との相性（良い面）</p>
+        <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][1][:title] %></h2>
+        <p class="text-sm text-base-content/70 leading-relaxed"><%= @message[:sections][1][:body] %></p>
+      </div>
+    </div>
+
+    <%# 完璧主義の弱点 %>
+    <div class="card bg-primary/10 border border-primary/30 mb-4">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-primary uppercase tracking-widest mb-2">習慣との相性（難しい面）</p>
+        <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][2][:title] %></h2>
+        <ul class="mt-1 space-y-3">
+          <% @message[:sections][2][:points].each do |point| %>
+            <li>
+              <p class="text-sm text-base-content/80"><%= point[:issue] %></p>
+              <p class="text-sm text-base-content/50 pl-3 mt-1">→ <%= point[:result] %></p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <%# 考え方を変える %>
+    <div class="card bg-info/10 border border-info/30 mb-4">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-info uppercase tracking-widest mb-2">考え方のヒント</p>
+        <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][3][:title] %></h2>
+        <p class="text-sm text-base-content/70 leading-relaxed"><%= @message[:sections][3][:body] %></p>
+      </div>
+    </div>
+
+    <%# まとめ %>
+    <div class="card bg-warning/10 border border-warning/30 mb-6">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-warning uppercase tracking-widest mb-2">まずはここから</p>
+        <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][4][:title] %></h2>
+        <p class="text-sm text-base-content/70 leading-relaxed"><%= @message[:sections][4][:body] %></p>
+      </div>
+    </div>
+
+    <%= link_to "ホームへ移動", root_path, class: "btn btn-outline w-full" %>
+  </div>
+</div>
