@@ -1,0 +1,39 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">習慣 詳細</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto space-y-4">
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5 space-y-4">
+        <div>
+          <p class="text-xs text-base-content/60 mb-1">習慣タイトル</p>
+          <p class="text-sm font-medium"><%= @habit.title %></p>
+        </div>
+        <div>
+          <p class="text-xs text-base-content/60 mb-1">習慣内容</p>
+          <%= simple_format @habit.content, class: "text-sm" %>
+        </div>
+        <div>
+          <p class="text-xs text-base-content/60 mb-1">最低ライン</p>
+          <p class="text-sm"><%= @habit.minimum_goal %></p>
+        </div>
+        <% if @habit.exception_rule.present? %>
+          <div>
+            <p class="text-xs text-base-content/60 mb-1">習慣ルール</p>
+            <p class="text-sm"><%= @habit.exception_rule %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= link_to "編集", "#", class: "btn btn-primary w-full" %>
+    <%= button_to "削除", habit_path(@habit), method: :delete, class: "btn btn-outline btn-error w-full", data: { turbo_confirm: "本当に削除しますか？" } %>
+
+  </div>
+</div>
