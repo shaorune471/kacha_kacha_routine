@@ -1,11 +1,15 @@
 <div class="navbar bg-base-100 border-b border-base-200">
   <div class="max-w-xl mx-auto w-full flex">
     <div class="flex-1">
-      <span class="text-lg font-medium">カチャカチャルーティーン</span>
+      <%= link_to "カチャカチャルーティーン", root_path, class: "text-lg font-medium" %>
     </div>
     <div class="flex gap-2">
-      <a class="btn btn-ghost btn-sm">ログイン</a>
-      <a class="btn btn-primary btn-sm">新規登録</a>
+      <% if user_signed_in? %>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-ghost btn-sm" %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-ghost btn-sm" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary btn-sm" %>
+      <% end %>
     </div>
   </div>
 </div>

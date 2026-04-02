@@ -1,0 +1,50 @@
+<div class="navbar bg-base-100 border-b border-base-200">
+  <div class="max-w-xl mx-auto w-full flex">
+    <div class="flex-1">
+      <%= link_to "カチャカチャルーティーン", root_path, class: "text-lg font-medium" %>
+    </div>
+  </div>
+</div>
+
+<div class="px-6 py-10 min-h-screen bg-base-200">
+  <div class="max-w-sm mx-auto">
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-6">
+        <h1 class="text-lg font-medium mb-6">新規登録</h1>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-4">
+            <%= f.label :name, "名前", class: "text-sm text-base-content/70 block mb-1" %>
+            <%= f.text_field :name, autofocus: true, class: "input input-bordered w-full" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :email, "メールアドレス", class: "text-sm text-base-content/70 block mb-1" %>
+            <%= f.email_field :email, class: "input input-bordered w-full" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :password, "パスワード", class: "text-sm text-base-content/70 block mb-1" %>
+            <%= f.password_field :password, class: "input input-bordered w-full" %>
+          </div>
+
+          <div class="mb-6">
+            <%= f.label :password_confirmation, "パスワード確認", class: "text-sm text-base-content/70 block mb-1" %>
+            <%= f.password_field :password_confirmation, class: "input input-bordered w-full" %>
+          </div>
+
+          <%= f.submit "登録", class: "btn btn-primary w-full" %>
+        <% end %>
+
+        <div class="text-center mt-4">
+          <p class="text-sm text-base-content/70">
+            すでにアカウントをお持ちの方は
+            <%= link_to "ログイン", new_session_path(resource_name), class: "text-primary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
