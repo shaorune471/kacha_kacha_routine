@@ -1,0 +1,17 @@
+<nav class="navbar bg-base-100 border-b border-base-200">
+  <div class="max-w-xl mx-auto w-full flex">
+    <div class="flex-1">
+      <%= link_to "カチャカチャルーティーン", root_path, class: "text-lg font-medium" %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="flex gap-2">
+        <%= link_to "リフレーミング", reframing_path, class: "btn btn-ghost btn-sm" %>
+      </div>
+    <% else %>
+      <div class="flex gap-2">
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-ghost btn-sm" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+</nav>
