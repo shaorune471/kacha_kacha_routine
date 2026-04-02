@@ -1,0 +1,65 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">ホーム</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto">
+
+    <%# リフレーミングバナー %>
+    <%= link_to reframing_path, class: "block mb-6" do %>
+      <div class="alert bg-primary/10 border border-primary/30">
+        <p class="text-sm text-primary">完璧主義のリフレーミングをしませんか？</p>
+      </div>
+    <% end %>
+
+    <%# 経験値・進捗 %>
+    <div class="grid grid-cols-2 gap-3 mb-6">
+      <div class="bg-base-100 rounded-xl p-4 border border-base-200">
+        <p class="text-xs text-base-content/60 mb-1">経験値</p>
+        <p class="text-xl font-medium">0 pt</p>
+      </div>
+      <div class="bg-base-100 rounded-xl p-4 border border-base-200">
+        <p class="text-xs text-base-content/60 mb-1">今日の進捗</p>
+        <p class="text-xl font-medium">0 / <%= @habits.count %></p>
+      </div>
+    </div>
+
+    <%# 習慣一覧 %>
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-base font-medium">習慣一覧</h2>
+      <%= link_to "習慣を登録", new_habit_path, class: "btn btn-primary btn-sm" %>
+    </div>
+
+    <% if @habits.empty? %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-6 text-center">
+          <p class="text-sm text-base-content/60">習慣がまだ登録されていません。</p>
+          <%= link_to "最初の習慣を登録する", new_habit_path, class: "btn btn-primary btn-sm mt-3" %>
+        </div>
+      </div>
+    <% else %>
+      <% @habits.each do |habit| %>
+        <div class="card bg-base-100 border border-base-200 mb-3">
+          <div class="card-body p-0">
+            <%= link_to habit_path(habit), class: "block p-4 border-b border-base-200" do %>
+              <div class="flex items-center justify-between mb-1">
+                <p class="text-sm font-medium"><%= habit.title %></p>
+                <span class="text-xs text-base-content/60">習慣ポイント：0</span>
+              </div>
+              <p class="text-xs text-base-content/60">最低ライン：<%= habit.minimum_goal %></p>
+            <% end %>
+            <div class="flex items-center justify-between px-4 py-2 bg-base-200/50">
+              <span class="text-xs text-base-content/60">習慣チェック：<%= habit.title %></span>
+              <span class="badge badge-ghost badge-sm">未チェック</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <footer class="border-t border-base-200 bg-base-100">
   <div class="max-w-xl mx-auto px-6 py-3 flex items-center justify-between">
     <div class="flex gap-6">
-      <%= link_to "ホーム", root_path, class: "text-sm text-base-content/70 hover:text-base-content" %>
+      <%= link_to "ホーム", home_path, class: "text-sm text-base-content/70 hover:text-base-content" %>
       <%= link_to "振り返り", "#", class: "text-sm text-base-content/70 hover:text-base-content" %>
     </div>
     <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-ghost btn-sm text-sm" %>

@@ -4,5 +4,8 @@ Rails.application.routes.draw do
     sessions: "sessions"
   }
   root "tops#index"
+  get "home", to: "homes#index"
   get "reframing", to: "reframings#index"
+
+  resources :habits
 end
