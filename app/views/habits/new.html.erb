@@ -1,0 +1,13 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">習慣 登録</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto">
+    <%= render "form", habit: @habit %>
+  </div>
+</div>
