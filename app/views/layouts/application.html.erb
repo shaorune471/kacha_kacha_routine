@@ -18,7 +18,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="min-h-screen flex flex-col">
+    <%= render "shared/header" %>
+    <main class="flex-1">
+      <%= yield %>
+    </main>
+    <% if user_signed_in? %>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>
