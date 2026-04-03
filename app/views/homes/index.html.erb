@@ -10,10 +10,12 @@
   <div class="max-w-xl mx-auto">
 
     <%# リフレーミングバナー %>
-    <%= link_to reframing_path, class: "block mb-6" do %>
-      <div class="alert bg-primary/10 border border-primary/30">
-        <p class="text-sm text-primary">完璧主義のリフレーミングをしませんか？</p>
-      </div>
+    <% if @show_reframing_banner %>
+      <%= link_to reframing_path, class: "block mb-6" do %>
+        <div class="alert bg-primary/10 border border-primary/30">
+          <p class="text-sm text-primary">完璧主義のリフレーミングをしませんか？</p>
+        </div>
+      <% end %>
     <% end %>
 
     <%# 経験値・進捗 %>
