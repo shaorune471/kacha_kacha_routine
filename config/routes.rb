@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "tops#index"
   get "home", to: "homes#index"
   get "reframing", to: "reframings#index"
+  get "reviews", to: "reviews#index"
 
   resources :habits do
     resources :habit_checks, only: [ :new, :create, :edit, :update ]
