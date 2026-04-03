@@ -53,10 +53,10 @@
               <p class="text-xs text-base-content/60">最低ライン：<%= habit.minimum_goal %></p>
             <% end %>
             <% if habit.checked_today? %>
-              <div class="flex items-center justify-between px-4 py-2 bg-base-200/50">
+              <%= link_to edit_habit_habit_check_path(habit, habit.habit_checks.find_by(checked_on: Date.today)), class: "flex items-center justify-between px-4 py-2 bg-base-200/50 hover:bg-base-200" do %>
                 <span class="text-xs text-base-content/60">習慣チェック：<%= habit.title %></span>
                 <span class="badge badge-success badge-sm">チェック済み</span>
-              </div>
+              <% end %>
             <% else %>
               <%= link_to new_habit_habit_check_path(habit), class: "flex items-center justify-between px-4 py-2 bg-base-200/50 hover:bg-base-200" do %>
                 <span class="text-xs text-base-content/60">習慣チェック：<%= habit.title %></span>

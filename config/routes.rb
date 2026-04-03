@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get "reframing", to: "reframings#index"
 
   resources :habits do
-    resources :habit_checks, only: [ :new, :create ]
+    resources :habit_checks, only: [ :new, :create, :edit, :update ]
   end
 end

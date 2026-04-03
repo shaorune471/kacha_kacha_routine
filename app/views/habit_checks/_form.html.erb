@@ -46,5 +46,5 @@
     <%= f.text_field :memo, class: "input input-bordered w-full" %>
   </div>
 
-  <%= f.submit "登録", class: "btn btn-primary w-full" %>
+  <%= f.submit habit_check.new_record? ? "登録" : "更新", class: "btn btn-primary w-full" %>
 <% end %>
