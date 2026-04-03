@@ -1,6 +1,6 @@
 class HabitsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_habit, only: [ :show, :destroy ]
+  before_action :set_habit, only: [ :show, :edit, :update, :destroy ]
 
   def new
     @habit = Habit.new
@@ -16,6 +16,17 @@ class HabitsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @habit.update(habit_params)
+      redirect_to habit_path(@habit), notice: "習慣を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
