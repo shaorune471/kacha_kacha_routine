@@ -1,0 +1,32 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">振り返り 一覧</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto">
+
+    <% if @habits.empty? %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-6 text-center">
+          <p class="text-sm text-base-content/60">習慣がまだ登録されていません。</p>
+        </div>
+      </div>
+    <% else %>
+      <% @habits.each do |habit| %>
+        <div class="card bg-base-100 border border-base-200 mb-3">
+          <div class="card-body p-4">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-medium"><%= habit.title %></p>
+              <span class="text-xs text-base-content/60">習慣ポイント：0</span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
