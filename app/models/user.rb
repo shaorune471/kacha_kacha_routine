@@ -3,4 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :habits, dependent: :destroy
+
+  def total_experience
+    habits.sum(&:total_points)
+  end
 end
