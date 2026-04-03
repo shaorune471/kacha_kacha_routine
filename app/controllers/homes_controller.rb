@@ -3,5 +3,7 @@ class HomesController < ApplicationController
 
   def index
     @habits = current_user.habits
+    @total_experience = current_user.total_experience
+    @checked_today_count = @habits.count(&:checked_today?)
   end
 end

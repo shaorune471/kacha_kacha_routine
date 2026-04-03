@@ -20,11 +20,11 @@
     <div class="grid grid-cols-2 gap-3 mb-6">
       <div class="bg-base-100 rounded-xl p-4 border border-base-200">
         <p class="text-xs text-base-content/60 mb-1">経験値</p>
-        <p class="text-xl font-medium">0 pt</p>
+        <p class="text-xl font-medium"><%= @total_experience %> pt</p>
       </div>
       <div class="bg-base-100 rounded-xl p-4 border border-base-200">
         <p class="text-xs text-base-content/60 mb-1">今日の進捗</p>
-        <p class="text-xl font-medium">0 / <%= @habits.count %></p>
+        <p class="text-xl font-medium"><%= @checked_today_count %> / <%= @habits.count %></p>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
             <%= link_to habit_path(habit), class: "block p-4 border-b border-base-200" do %>
               <div class="flex items-center justify-between mb-1">
                 <p class="text-sm font-medium"><%= habit.title %></p>
-                <span class="text-xs text-base-content/60">習慣ポイント：0</span>
+                <span class="text-xs text-base-content/60">習慣ポイント：<%= habit.total_points %></span>
               </div>
               <p class="text-xs text-base-content/60">最低ライン：<%= habit.minimum_goal %></p>
             <% end %>
