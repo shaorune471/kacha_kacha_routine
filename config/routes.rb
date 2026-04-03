@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   get "home", to: "homes#index"
   get "reframing", to: "reframings#index"
 
-  resources :habits
+  resources :habits do
+    resources :habit_checks, only: [ :new, :create ]
+  end
 end
