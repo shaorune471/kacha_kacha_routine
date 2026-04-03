@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :habits do
     resources :habit_checks, only: [ :new, :create, :edit, :update ]
+    resources :reviews, only: [ :show ]
   end
 end

@@ -17,14 +17,16 @@
       </div>
     <% else %>
       <% @habits.each do |habit| %>
-        <div class="card bg-base-100 border border-base-200 mb-3">
-          <div class="card-body p-4">
-            <div class="flex items-center justify-between">
-              <p class="text-sm font-medium"><%= habit.title %></p>
-              <span class="text-xs text-base-content/60">習慣ポイント：0</span>
+        <%= link_to habit_review_path(habit, habit), class: "block mb-3" do %>
+          <div class="card bg-base-100 border border-base-200 hover:border-base-300">
+            <div class="card-body p-4">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-medium"><%= habit.title %></p>
+                <span class="text-xs text-base-content/60">習慣ポイント：0</span>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
 

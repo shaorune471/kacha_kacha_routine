@@ -1,0 +1,65 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium"><%= @habit.title %> 振り返り</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto space-y-4">
+
+    <%# アドバイスカード %>
+    <div class="card bg-primary/10 border border-primary/30">
+      <div class="card-body p-5">
+        <p class="text-xs font-medium text-primary uppercase tracking-widest mb-3">振り返りのアドバイス</p>
+        <ul class="space-y-2">
+          <li class="text-sm text-primary/80">・一日の予定に余裕はありますか？</li>
+          <li class="text-sm text-primary/80">・もっと簡略化して最低限にできますか？</li>
+          <li class="text-sm text-primary/80">・例外が起きた時はどうしますか？</li>
+        </ul>
+      </div>
+    </div>
+
+    <%# 習慣編集ボタン %>
+    <%= link_to "習慣を編集する", edit_habit_path(@habit), class: "btn btn-primary w-full" %>
+
+    <%# チェック履歴 %>
+    <% if @habit_checks.empty? %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-6 text-center">
+          <p class="text-sm text-base-content/60">チェック履歴がまだありません。</p>
+        </div>
+      </div>
+    <% else %>
+      <% @habit_checks.group_by { |hc| hc.checked_on.beginning_of_week }.each do |week_start, checks| %>
+        <div class="card bg-base-100 border border-base-200">
+          <div class="card-body p-5">
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-sm font-medium">
+                <%= week_start.strftime("%m月%d日") %>〜<%= (week_start + 6.days).strftime("%m月%d日") %>
+              </p>
+              <span class="text-xs text-base-content/60">獲得習慣ポイント：0</span>
+            </div>
+            <div class="space-y-2">
+              <% checks.each do |check| %>
+                <div class="text-xs text-base-content/70">
+                  <span class="font-medium"><%= check.checked_on.strftime("%m/%d") %></span>
+                  <span class="ml-2"><%= check.evaluation_i18n %></span>
+                  <% if check.exception_content.present? %>
+                    <span class="ml-2 text-base-content/50">例外：<%= check.exception_content %></span>
+                  <% end %>
+                  <% if check.exception_condition.present? %>
+                    <span class="ml-1 text-base-content/50">（<%= check.exception_condition %>）</span>
+                  </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
