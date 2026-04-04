@@ -6,6 +6,8 @@ class Habit < ApplicationRecord
   validates :content, presence: true
   validates :minimum_goal, presence: true
 
+  validate :minimum_goal_validates
+
   def checked_today?
     habit_checks.exists?(checked_on: Date.today)
   end
@@ -42,6 +44,7 @@ class Habit < ApplicationRecord
       prev_check = sorted_checks.select { |hc| hc.checked_on < check.checked_on }.last
 
       # 前回の習慣チェックがない（初日）または達成していれば+1pt
+      # 週の初日でも再開で+2ptになる場合がある
       if prev_check.nil? || achieved?(prev_check)
         score += 1
       else
@@ -56,5 +59,11 @@ class Habit < ApplicationRecord
 
   def achieved?(check)
     check.all_achieved? || check.minimum_achieved?
+  end
+
+  def minimum_goal_validates
+    if content.present? && minimum_goal.present? && content == minimum_goal
+      errors.add(:minimum_goal, "は習慣内容と違う内容にしてください")
+    end
   end
 end

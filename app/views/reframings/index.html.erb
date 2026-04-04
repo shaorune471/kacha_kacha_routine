@@ -1,6 +1,13 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">完璧主義のリフレーミング</span>
+    </div>
+  </nav>
+<% end %>
+
 <div class="px-6 py-10 min-h-screen bg-base-200">
   <div class="max-w-xl mx-auto">
-    <h1 class="text-lg font-medium mb-6">完璧主義のリフレーミング</h1>
 
     <%# 完璧主義の強み %>
     <div class="card bg-info/10 border border-info/30 mb-4">
@@ -37,9 +44,9 @@
     </div>
 
     <%# 考え方を変える %>
-    <div class="card bg-info/10 border border-info/30 mb-4">
+    <div class="card bg-primary/10 border border-primary/30 mb-4">
       <div class="card-body p-5">
-        <p class="text-xs font-medium text-info uppercase tracking-widest mb-2">考え方のヒント</p>
+        <p class="text-xs font-medium text-primary uppercase tracking-widest mb-2">考え方のヒント</p>
         <h2 class="text-sm font-medium leading-relaxed mb-3"><%= @message[:sections][3][:title] %></h2>
         <p class="text-sm text-base-content/70 leading-relaxed"><%= @message[:sections][3][:body] %></p>
       </div>

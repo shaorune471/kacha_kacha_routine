@@ -1,0 +1,42 @@
+ja:
+  errors:
+    messages:
+      not_saved:
+        one: "エラーが1件あります"
+        other: "%{count}件のエラーがあります"
+      blank: "を入力してください"
+      taken: "はすでに使用されています"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以下で入力してください"
+      invalid: "は不正な値です"
+      confirmation: "と%{attribute}の入力が一致しません"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        name: "名前"
+      habit:
+        title: "習慣タイトル"
+        content: "習慣内容"
+        minimum_goal: "最低ライン"
+        exception_rule: "習慣ルール"
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    registrations:
+      signed_up: "アカウントを登録しました。"
+    failure:
+      invalid: "メールアドレスまたはパスワードが違います。"
+      not_found_in_database: "メールアドレスまたはパスワードが違います。"
+      already_authenticated: "すでにログインしています。"
+      unauthenticated: "ログインしてください。"
+  enums:
+    habit_check:
+      evaluation:
+        all_achieved: "全ての習慣を達成"
+        minimum_achieved: "最低ラインを達成"
+        exception: "例外で未達成"
+        room_for_growth: "伸びしろあり"

@@ -43,7 +43,7 @@
 
   <div>
     <%= f.label :memo, "メモ", class: "text-sm text-base-content/70 block mb-1" %>
-    <%= f.text_field :memo, class: "input input-bordered w-full" %>
+    <%= f.text_area :memo, rows: 3, class: "textarea textarea-bordered w-full" %>
   </div>
 
   <%= f.submit habit_check.new_record? ? "登録" : "更新", class: "btn btn-primary w-full" %>

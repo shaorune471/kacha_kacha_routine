@@ -9,7 +9,7 @@ class HabitsController < ApplicationController
   def create
     @habit = current_user.habits.new(habit_params)
     if @habit.save
-      redirect_to home_path, notice: "習慣を登録しました"
+      redirect_to habit_path(@habit), notice: "習慣を登録しました"
     else
       render :new, status: :unprocessable_entity
     end

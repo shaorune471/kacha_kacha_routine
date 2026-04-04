@@ -9,12 +9,14 @@
 <div class="px-6 py-8 bg-base-200 min-h-screen">
   <div class="max-w-xl mx-auto">
 
-    <div class="card bg-base-100 border border-base-200 mb-6">
-      <div class="card-body p-4">
-        <p class="text-sm font-medium"><%= @habit.title %></p>
-        <p class="text-xs text-base-content/60">最低ライン：<%= @habit.minimum_goal %></p>
+    <%= link_to habit_path(@habit), class: "block mb-6" do %>
+      <div class="card bg-base-100 border border-base-200 hover:border-base-300">
+        <div class="card-body p-4">
+          <p class="text-sm font-medium"><%= @habit.title %></p>
+          <p class="text-xs text-base-content/60">最低ライン：<%= @habit.minimum_goal %></p>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <%= render "form", habit: @habit, habit_check: @habit_check %>
 
