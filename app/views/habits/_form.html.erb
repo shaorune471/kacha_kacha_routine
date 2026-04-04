@@ -29,5 +29,5 @@
     <%= f.text_field :exception_rule, class: "input input-bordered w-full" %>
   </div>
 
-  <%= f.submit "登録", class: "btn btn-primary w-full mt-2" %>
+  <%= f.submit habit.new_record? ? "登録" : "更新", class: "btn btn-primary w-full mt-2" %>
 <% end %>

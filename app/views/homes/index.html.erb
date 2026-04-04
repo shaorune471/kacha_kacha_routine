@@ -12,8 +12,8 @@
     <%# リフレーミングバナー %>
     <% if @show_reframing_banner %>
       <%= link_to reframing_path, class: "block mb-6" do %>
-        <div class="alert bg-primary/10 border border-primary/30">
-          <p class="text-sm text-primary">完璧主義のリフレーミングをしませんか？</p>
+        <div class="alert bg-info/10 border border-info/30">
+          <p class="text-sm text-info">完璧主義のリフレーミングをしませんか？</p>
         </div>
       <% end %>
     <% end %>
@@ -47,7 +47,7 @@
       <% @habits.each do |habit| %>
         <div class="card bg-base-100 border border-base-200 mb-3">
           <div class="card-body p-0">
-            <%= link_to habit_path(habit), class: "block p-4 border-b border-base-200" do %>
+            <%= link_to habit_path(habit), class: "block p-4" do %>
               <div class="flex items-center justify-between mb-1">
                 <p class="text-sm font-medium"><%= habit.title %></p>
                 <span class="text-xs text-base-content/60">習慣ポイント：<%= habit.total_points %></span>
@@ -57,7 +57,7 @@
             <% if habit.checked_today? %>
               <%= link_to edit_habit_habit_check_path(habit, habit.habit_checks.find_by(checked_on: Date.today)), class: "flex items-center justify-between px-4 py-2 bg-base-200/50 hover:bg-base-200" do %>
                 <span class="text-xs text-base-content/60">習慣チェック：<%= habit.title %></span>
-                <span class="badge badge-success badge-sm">チェック済み</span>
+                <span class="badge badge-primary badge-sm">チェック済み</span>
               <% end %>
             <% else %>
               <%= link_to new_habit_habit_check_path(habit), class: "flex items-center justify-between px-4 py-2 bg-base-200/50 hover:bg-base-200" do %>
