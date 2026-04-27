@@ -8,13 +8,14 @@ class HabitChecksController < ApplicationController
       redirect_to edit_habit_habit_check_path(@habit, today_check)
       return
     end
-    @habit_check = HabitCheck.new(checked_on: Date.today)
+    @habit_check = @habit.habit_checks.build(checked_on: Date.today)
+    authorize @habit_check
   end
 
   def create
     @habit_check = @habit.habit_checks.new(habit_check_params)
     @habit_check.checked_on = Date.today
-
+    authorize @habit_check
     if @habit_check.save
       redirect_to home_path, notice: "チェックを記録しました"
     else
@@ -24,10 +25,12 @@ class HabitChecksController < ApplicationController
 
   def edit
     @habit_check = @habit.habit_checks.find(params[:id])
+    authorize @habit_check
   end
 
   def update
     @habit_check = @habit.habit_checks.find(params[:id])
+    authorize @habit_check
     if @habit_check.update(habit_check_params)
       redirect_to home_path, notice: "チェックを更新しました"
     else
@@ -38,7 +41,7 @@ class HabitChecksController < ApplicationController
   private
 
   def set_habit
-    @habit = current_user.habits.find(params[:habit_id])
+    @habit = Habit.find(params[:habit_id])
   end
 
   def habit_check_params
