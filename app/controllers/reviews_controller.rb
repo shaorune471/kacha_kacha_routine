@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @habit = current_user.habits.find(params[:habit_id])
+    @habit = Habit.find(params[:habit_id])
+    authorize @habit, policy_class: ReviewPolicy
     @habit_checks = @habit.habit_checks.order(checked_on: :desc)
   end
 end

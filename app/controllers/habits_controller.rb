@@ -4,10 +4,12 @@ class HabitsController < ApplicationController
 
   def new
     @habit = Habit.new
+    authorize @habit
   end
 
   def create
     @habit = current_user.habits.new(habit_params)
+    authorize @habit
     if @habit.save
       redirect_to habit_path(@habit), notice: "習慣を登録しました"
     else
@@ -16,12 +18,15 @@ class HabitsController < ApplicationController
   end
 
   def show
+    authorize @habit
   end
 
   def edit
+    authorize @habit
   end
 
   def update
+    authorize @habit
     if @habit.update(habit_params)
       redirect_to habit_path(@habit), notice: "習慣を更新しました"
     else
@@ -30,6 +35,7 @@ class HabitsController < ApplicationController
   end
 
   def destroy
+    authorize @habit
     @habit.destroy
     redirect_to home_path, notice: "習慣を削除しました"
   end
@@ -37,7 +43,7 @@ class HabitsController < ApplicationController
   private
 
   def set_habit
-    @habit = current_user.habits.find(params[:id])
+    @habit = Habit.find(params[:id])
   end
 
   def habit_params
