@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   }
   root "tops#index"
   get "home", to: "homes#index"
+  get "guide", to: "guides#index"
   get "reframing", to: "reframings#index"
+  post "reframing/finish", to: "reframings#finish_onboarding", as: :finish_onboarding
   get "reviews", to: "reviews#index"
 
   resources :habits do
