@@ -61,6 +61,10 @@
       </div>
     </div>
 
-    <%= link_to "ホームへ移動", root_path, class: "btn btn-outline w-full" %>
+    <% if session[:onboarding] %>
+      <%= button_to "ホームへ移動", finish_onboarding_path, method: :post, class: "btn btn-outline w-full" %>
+    <% else %>
+      <%= link_to "ホームへ移動", home_path, class: "btn btn-outline w-full" %>
+    <% end %>
   </div>
 </div>
