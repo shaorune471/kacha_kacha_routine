@@ -20,7 +20,7 @@ class Habit < ApplicationRecord
     sorted_checks.each_with_index do |check, i|
       next unless achieved?(check)
 
-      # 全て・最低ライン達成で+1pt、前回の習慣チェックが未達成で+2pt（初日は1pt固定）
+      # 全て・最低目標達成で+1pt、前回の習慣チェックが未達成で+2pt（初日は1pt固定）
       if i == 0 || achieved?(sorted_checks[i - 1])
         score += 1
       else
