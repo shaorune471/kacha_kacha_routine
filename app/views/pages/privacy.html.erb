@@ -1,4 +1,102 @@
-<div>
-  <h1 class="font-bold text-4xl">Pages#privacy</h1>
-  <p>Find me in app/views/pages/privacy.html.erb</p>
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">プライバシーポリシー</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto space-y-6">
+
+    <p class="text-xs text-base-content/80 text-right">更新日：2026年5月9日</p>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <p class="text-sm text-base-content/70 leading-relaxed">
+          HabitResteps（以下、「本サービス」）は、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。
+        </p>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第1条（収集する個人情報）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed mb-3">本サービスでは、以下の個人情報を収集します。</p>
+        <ul class="space-y-1">
+          <li class="text-sm text-base-content/70">・ユーザー名</li>
+          <li class="text-sm text-base-content/70">・メールアドレス</li>
+          <li class="text-sm text-base-content/70">・習慣の登録内容・チェック履歴等のサービス利用データ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第2条（利用目的）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed mb-3">収集した情報は、以下の目的のために利用します。</p>
+        <ul class="space-y-1">
+          <li class="text-sm text-base-content/70">・本サービスの提供・運営のため</li>
+          <li class="text-sm text-base-content/70">・ユーザーからのお問い合わせに対応するため</li>
+          <li class="text-sm text-base-content/70">・本サービスの改善・新機能の開発のため</li>
+          <li class="text-sm text-base-content/70">・利用規約に違反するユーザーの特定・対応のため</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第3条（第三者提供）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed">本サービスは、以下の場合を除き、ユーザーの個人情報を第三者に提供することはありません。</p>
+        <ul class="mt-3 space-y-1">
+          <li class="text-sm text-base-content/70">・ユーザーの同意がある場合</li>
+          <li class="text-sm text-base-content/70">・法令に基づく場合</li>
+          <li class="text-sm text-base-content/70">・人の生命・身体・財産の保護のために必要な場合</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第4条（個人情報の開示・訂正・削除）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed">
+          ユーザーは、本サービスが保有する自己の個人情報の開示・訂正・削除を請求することができます。請求がある場合には、合理的な期間内に対応します。
+        </p>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第5条（安全管理措置）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed">本サービスは、収集した個人情報の漏洩・滅失・毀損を防止するため、適切なセキュリティ対策を実施します。</p>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第6条（Cookieの使用）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed">
+          本サービスでは、ログイン状態の維持等のためにCookieを使用しています。
+          ブラウザの設定によりCookieを無効にすることができますが、その場合、本サービスの一部機能が利用できなくなる場合があります。
+        </p>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <h2 class="text-sm font-medium mb-3">第7条（プライバシーポリシーの変更）</h2>
+        <p class="text-sm text-base-content/70 leading-relaxed">
+          本ポリシーの内容は、ユーザーに通知すること無く、変更することができるものとします。
+          変更後のプライバシーポリシーは、本サービス上に掲示された時点より効力を生じるものとします。
+        </p>
+      </div>
+    </div>
+
+    <% if user_signed_in? %>
+      <%= link_to "ホームへ戻る", home_path, class: "btn btn-outline w-full" %>
+    <% else %>
+      <%= link_to "トップページへ戻る", root_path, class: "btn btn-outline w-full" %>
+    <% end %>
+
+  </div>
 </div>
