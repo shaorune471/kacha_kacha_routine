@@ -10,7 +10,7 @@ class HabitCheck < ApplicationRecord
   def evaluation_i18n
     {
       "all_achieved" => "全ての習慣を達成",
-      "minimum_achieved" => "最低ラインを達成",
+      "minimum_achieved" => "最低目標を達成",
       "exception" => "例外で未達成",
       "room_for_growth" => "伸びしろあり"
     }[evaluation]

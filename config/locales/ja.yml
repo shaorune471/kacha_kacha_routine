@@ -20,8 +20,10 @@ ja:
       habit:
         title: "習慣タイトル"
         content: "習慣内容"
-        minimum_goal: "最低ライン"
+        minimum_goal: "最低目標"
         exception_rule: "習慣ルール"
+      habit_check:
+        evaluation: "習慣の評価"
   devise:
     sessions:
       signed_in: "ログインしました。"
@@ -37,6 +39,6 @@ ja:
     habit_check:
       evaluation:
         all_achieved: "全ての習慣を達成"
-        minimum_achieved: "最低ラインを達成"
+        minimum_achieved: "最低目標を達成"
         exception: "例外で未達成"
         room_for_growth: "伸びしろあり"

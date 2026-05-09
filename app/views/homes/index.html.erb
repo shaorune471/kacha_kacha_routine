@@ -52,7 +52,7 @@
                 <p class="text-sm font-medium"><%= habit.title %></p>
                 <span class="text-xs text-base-content/60">習慣ポイント：<%= habit.total_points %></span>
               </div>
-              <p class="text-xs text-base-content/60">最低ライン：<%= habit.minimum_goal %></p>
+              <p class="text-xs text-base-content/60">最低目標：<%= habit.minimum_goal %></p>
             <% end %>
             <% if habit.checked_today? %>
               <%= link_to edit_habit_habit_check_path(habit, habit.habit_checks.find_by(checked_on: Date.today)), class: "flex items-center justify-between px-4 py-2 bg-base-200/50 hover:bg-base-200" do %>

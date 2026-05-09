@@ -20,7 +20,7 @@
           <%= simple_format @habit.content, class: "text-sm" %>
         </div>
         <div>
-          <p class="text-xs text-base-content/60 mb-1">最低ライン</p>
+          <p class="text-xs text-base-content/60 mb-1">最低目標</p>
           <p class="text-sm"><%= @habit.minimum_goal %></p>
         </div>
         <% if @habit.exception_rule.present? %>
