@@ -1,0 +1,82 @@
+require "rails_helper"
+
+RSpec.describe Habit, type: :model do
+  describe "バリデーション" do
+    it "タイトルが必須" do
+      habit = build(:habit, title: nil)
+      expect(habit).not_to be_valid
+    end
+
+    it "習慣内容が必須" do
+      habit = build(:habit, content: nil)
+      expect(habit).not_to be_valid
+    end
+
+    it "最低ラインが必須" do
+      habit = build(:habit, minimum_goal: nil)
+      expect(habit).not_to be_valid
+    end
+
+    it "タイトル・習慣内容・最低ラインが必須" do
+      habit = build(:habit)
+      expect(habit).to be_valid
+    end
+
+    it "同じユーザーで重複したタイトルは無効" do
+      user = create(:user)
+      create(:habit, user: user, title: "読書")
+      habit = build(:habit, user: user, title: "読書")
+      expect(habit).not_to be_valid
+    end
+
+    it "異なるユーザーで同じタイトルなら有効" do
+      create(:habit, title: "読書")
+      habit = build(:habit, title: "読書")
+      expect(habit).to be_valid
+    end
+  end
+
+  describe "#checked_today?" do
+    let(:habit) { create(:habit) }
+
+    it "今日チェック済みの場合はtrueを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today)
+      expect(habit.checked_today?).to be true
+    end
+
+    it "今日チェックしていない場合はfalseを返す" do
+      expect(habit.checked_today?).to be false
+    end
+  end
+
+  describe "#total_points" do
+    let(:habit) { create(:habit) }
+
+    it "チェックがない場合は0を返す" do
+      expect(habit.total_points).to eq(0)
+    end
+
+    it "全て達成で+1ptを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
+      expect(habit.total_points).to eq(1)
+    end
+
+    it "最低ライン達成で+1ptを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :minimum_achieved)
+      expect(habit.total_points).to eq(1)
+    end
+
+    it "未達成は0ptを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :room_for_growth)
+      expect(habit.total_points).to eq(0)
+    end
+
+    it "○××○の場合は+1+0+0+2=3ptを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 4, evaluation: :all_achieved)
+      create(:habit_check, habit: habit, checked_on: Date.today - 3, evaluation: :room_for_growth)
+      create(:habit_check, habit: habit, checked_on: Date.today - 2, evaluation: :room_for_growth)
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
+      expect(habit.total_points).to eq(3)
+    end
+  end
+end
