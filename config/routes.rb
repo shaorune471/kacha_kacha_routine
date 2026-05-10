@@ -11,9 +11,15 @@ Rails.application.routes.draw do
   get "reviews", to: "reviews#index"
   get "terms", to: "pages#terms"
   get "privacy", to: "pages#privacy"
+  get "contact", to: "contacts#new"
+  post "contact", to: "contacts#create"
 
   resources :habits do
     resources :habit_checks, only: [ :new, :create, :edit, :update ]
     resources :reviews, only: [ :show ]
+  end
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 end
