@@ -68,3 +68,5 @@ gem "meta-tags", "~> 2.23"
 gem "dotenv-rails", "~> 3.2"
 
 gem "letter_opener_web", "~> 3.0", group: :development
+
+gem "sendgrid-ruby", "~> 6.7"

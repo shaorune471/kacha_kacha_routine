@@ -7,12 +7,14 @@ class ContactsController < ApplicationController
     email = params[:email]
     message = params[:message]
 
-    ContactMailer.contact_mail(name, email, message).deliver_now
-    redirect_to contact_path, notice: "お問い合わせを送信しました。"
-  rescue => e
-    Rails.logger.error "ContactMailer error: #{e.message}"
-    Rails.logger.error e.backtrace.join("\n")
-    flash[:alert] = "送信に失敗しました。時間をおいて再度お試しください。"
-    render :new, status: :unprocessable_entity
+    response = ContactMailer.new.contact_mail(name, email, message)
+
+    if response.status_code.to_i.between?(200, 299)
+      redirect_to contact_path, notice: "お問い合わせを送信しました。"
+    else
+      Rails.logger.error "SendGrid error: #{response.status_code} #{response.body}"
+      flash[:alert] = "送信に失敗しました。時間をおいて再度お試しください。"
+      render :new, status: :unprocessable_entity
+    end
   end
 end
