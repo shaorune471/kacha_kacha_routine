@@ -1,0 +1,46 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">お問い合わせ</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto">
+
+    <div class="card bg-base-100 border border-base-200 mb-4">
+      <div class="card-body p-5">
+        <p class="text-sm text-base-content/70 leading-relaxed">
+          ご質問・ご要望・不具合のご報告などはこちらからお問い合わせください。確認後、メールにてご返信いたします。
+        </p>
+      </div>
+    </div>
+
+    <%= form_with url: contact_path, method: :post, class: "space-y-4" do |f| %>
+      <div>
+        <label class="text-sm text-base-content/70 block mb-1">お名前</label>
+        <%= text_field_tag :name, nil, class: "input input-bordered w-full", required: true %>
+      </div>
+
+      <div>
+        <label class="text-sm text-base-content/70 block mb-1">メールアドレス</label>
+        <%= email_field_tag :email, nil, class: "input input-bordered w-full", required: true %>
+      </div>
+
+      <div>
+        <label class="text-sm text-base-content/70 block mb-1">お問い合わせ内容</label>
+        <%= text_area_tag :message, nil, rows: 6, class: "textarea textarea-bordered w-full", required: true %>
+      </div>
+
+      <%= submit_tag "送信する", class: "btn btn-primary w-full" %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= link_to "ホームへ戻る", home_path, class: "btn btn-outline w-full mt-4" %>
+    <% else %>
+      <%= link_to "トップページへ戻る", root_path, class: "btn btn-outline w-full mt-4" %>
+    <% end %>
+
+  </div>
+</div>
