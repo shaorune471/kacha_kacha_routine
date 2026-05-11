@@ -1,57 +1,150 @@
-<div class="bg-base-100 px-6 py-12 border-b border-base-200">
+<%# ヒーローセクション %>
+<div class="px-6 py-12 border-b border-base-200" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
   <div class="max-w-xl mx-auto">
-    <p class="text-xs font-medium text-primary uppercase tracking-widest mb-4">完璧主義な性格の人専用の習慣アプリ</p>
-    <h1 class="text-3xl font-medium mb-4">完璧主義でも大丈夫！習慣は続けられる！</h1>
-    <p class="text-base-content/70 leading-relaxed mb-8">
-      <br>
+    <h1 class="text-3xl font-medium mb-3 leading-snug">完璧主義でも大丈夫！<br>習慣は続けられる！</h1>
+    <p class="text-base text-base-content/70 leading-loose mb-8">
       急用が入って、習慣が出来なかった・・・<br>
       仕事が忙しくて、習慣が途切れてしまった・・・<br>
       そんな経験、ありますよね？「またやってしまった」「もうだめだ」分かります。<br>
       <br>
-      でも大丈夫！性格に合わせた専用の仕組みで習慣を再開しましょう。<br>
-      完璧主義な性格は習慣と相性が良い部分もあります。性格が悪いのではありません。<br>
-      もっとシンプルに、習慣を続けていきましょう！！<br>
+      でも大丈夫！完璧主義な性格は悪いものではありません。習慣と相性が良い部分もあります。<br>
+      性格に合わせた専用の仕組みで、習慣を続けていきましょう！！
     </p>
+    <div class="flex justify-center">
+      <%= link_to "無料で始める", new_user_registration_path, class: "btn btn-primary" %>
+    </div>
   </div>
 </div>
 
-<div class="px-6 py-10 bg-base-200">
+<%# HabitRestepsの特徴 %>
+<div class="bg-base-200 px-6 py-12 border-b border-base-200">
   <div class="max-w-xl mx-auto">
-    <h2 class="text-base font-medium mb-5">既存アプリとの違い</h2>
-
-    <div class="card bg-base-100 border border-base-200 mb-3">
-      <div class="card-body p-4">
-        <h3 class="font-medium text-sm">定期的に性格のリフレーミング</h3>
-        <p class="text-sm text-base-content/70">
-          完璧主義な性格は悪いものではありません。弱点を理解し、強みを活かしていきましょう。</p>
+    <h2 class="text-lg font-medium mb-6">HabitRestepsの特徴</h2>
+    <div class="flex flex-col gap-3">
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><path d="M9 18h6"/></svg>
+            </div>
+            <p class="text-sm font-medium">定期的に性格のリフレーミング</p>
+          </div>
+          <p class="text-sm text-base-content/70 leading-relaxed">完璧主義な性格は悪いものではありません。弱点を理解し、強みを活かしていきましょう。</p>
+        </div>
       </div>
-    </div>
 
-    <div class="card bg-base-100 border border-base-200 mb-3">
-      <div class="card-body p-4">
-        <h3 class="font-medium text-sm">2段階の目標設定</h3>
-        <p class="text-sm text-base-content/70">
-          習慣ごとに「最低目標」を設定します。本を1ページ読むだけでも、筋トレ10回でも、それは十分な習慣です。</p>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <p class="text-sm font-medium">2段階の目標設定</p>
+          </div>
+          <p class="text-sm text-base-content/70 leading-relaxed">習慣ごとに「最低目標」を設定します。本を1ページ読むだけでも、筋トレ10回でも、それは十分な習慣です。</p>
+        </div>
       </div>
-    </div>
 
-    <div class="card bg-base-100 border border-base-200">
-      <div class="card-body p-4">
-        <h3 class="font-medium text-sm">想定外を想定</h3>
-        <p class="text-sm text-base-content/70">
-          体調不良や残業など、例外が起きる状況をあらかじめ想定します。想定通りであれば自分を責める必要はありません。</p>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <p class="text-sm font-medium">想定外を想定</p>
+          </div>
+          <p class="text-sm text-base-content/70 leading-relaxed">体調不良や残業など、例外が起きる状況をあらかじめ想定します。想定通りであれば自分を責める必要はありません。</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="px-6 py-4 bg-base-200">
-  <div class="max-w-xl mx-auto flex items-center justify-between">
-    <p class="text-xs text-base-content/50">© 2026 HabitResteps</p>
+<%# アプリの使い方 %>
+<div class="bg-base-100 px-6 py-12 border-b border-base-200">
+  <div class="max-w-xl mx-auto">
+    <h2 class="text-lg font-medium mb-6">アプリの使い方</h2>
+
+    <div class="flex gap-4 mb-6">
+      <div class="w-8 h-8 rounded-full bg-success/10 border border-success/30 flex items-center justify-center flex-shrink-0">
+        <span class="text-xs font-medium text-success">1</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium mb-1">習慣を登録する</p>
+        <p class="text-sm text-base-content/70 leading-relaxed mb-2">習慣のタイトルと内容を登録します。</p>
+        <div class="p-3 bg-success/5 border border-success/20 rounded-lg mb-2">
+          <p class="text-xs text-success/80 leading-relaxed">最低目標：「本を1ページ読む」など、どんな状況でも達成できる最小限の目標を設定します。</p>
+        </div>
+        <div class="p-3 bg-success/5 border border-success/20 rounded-lg">
+          <p class="text-xs text-success/80 leading-relaxed">習慣ルール：「急用が入った場合は最低目標を実施する」など、例外が起きたときの対応をあらかじめ決めておきます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-4 mb-6">
+      <div class="w-8 h-8 rounded-full bg-success/10 border border-success/30 flex items-center justify-center flex-shrink-0">
+        <span class="text-xs font-medium text-success">2</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium mb-1">毎日チェックする</p>
+        <p class="text-sm text-base-content/70 leading-relaxed mb-2">その日の習慣を4つの評価から選んで記録します。</p>
+        <div class="p-3 bg-success/5 border border-success/20 rounded-lg">
+          <p class="text-xs text-success/80 leading-relaxed">習慣ポイント：達成すると+1pt、再開すると+2pt。減点はありません。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-4 mb-6">
+      <div class="w-8 h-8 rounded-full bg-success/10 border border-success/30 flex items-center justify-center flex-shrink-0">
+        <span class="text-xs font-medium text-success">3</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium mb-1">振り返りをする</p>
+        <p class="text-sm text-base-content/70 leading-relaxed">例外が起きたパターンを把握して、習慣の内容や最低目標・習慣ルールを自分に合った形に調整しましょう。</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4 mb-6">
+      <div class="w-8 h-8 rounded-full bg-success/10 border border-success/30 flex items-center justify-center flex-shrink-0">
+        <span class="text-xs font-medium text-success">4</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium mb-1">習慣を改善する</p>
+        <p class="text-sm text-base-content/70 leading-relaxed">振り返りを基に習慣を調整します。アドバイスを参考にすることで、継続する手助けになります。</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4">
+      <div class="w-8 h-8 rounded-full bg-success/10 border border-success/30 flex items-center justify-center flex-shrink-0">
+        <span class="text-xs font-medium text-success">5</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium mb-1">定期的にリフレーミングする</p>
+        <p class="text-sm text-base-content/70 leading-relaxed">完璧主義な性格は悪いものではありません。定期的にリフレーミングページを読んで、自分の性格と上手く付き合っていきましょう。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# CTAセクション %>
+<div class="bg-success/10 px-6 py-12 border-t border-success/20">
+  <div class="max-w-xl mx-auto text-center">
+    <h2 class="text-2xl font-medium text-success mb-3">踏み出そう、何度でも</h2>
+    <p class="text-sm text-success/80 leading-relaxed mb-6">
+      完璧主義のまま、習慣を続けていきましょう。<br>まずは1つの習慣から始めてみませんか？
+    </p>
+    <%= link_to "最初の一歩を踏み出す", new_user_registration_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<%# フッター %>
+<div class="bg-base-100 px-6 py-4 border-t border-base-200">
+  <div class="max-w-xl mx-auto flex items-center justify-between flex-wrap gap-3">
     <div class="flex gap-4">
       <%= link_to "利用規約", terms_path, class: "text-sm text-base-content/70 hover:text-base-content" %>
       <%= link_to "プライバシーポリシー", privacy_path, class: "text-sm text-base-content/70 hover:text-base-content" %>
       <%= link_to "お問い合わせ", contact_path, class: "text-sm text-base-content/70 hover:text-base-content" %>
     </div>
+    <p class="text-xs text-base-content/50">© 2026 HabitResteps</p>
   </div>
 </div>
