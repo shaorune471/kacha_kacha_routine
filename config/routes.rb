@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: "registrations",
-    sessions: "sessions"
+    sessions: "sessions",
+    omniauth_callbacks: "omniauth_callbacks"
   }
   root "tops#index"
   get "home", to: "homes#index"
