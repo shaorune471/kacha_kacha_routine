@@ -55,6 +55,14 @@ class Habit < ApplicationRecord
     score
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    [ "title", "content", "minimum_goal" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   private
 
   def achieved?(check)
