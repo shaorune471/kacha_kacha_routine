@@ -30,6 +30,12 @@
           <%= f.submit "登録", class: "btn btn-primary w-full" %>
         <% end %>
 
+        <div class="divider">または</div>
+        <form action="/users/auth/google_oauth2" method="post" data-turbo="false">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <button type="submit" class="btn btn-outline w-full">Googleで登録</button>
+        </form>
+
         <div class="text-center mt-4">
           <p class="text-sm text-base-content/70">
             すでにアカウントをお持ちの方は
