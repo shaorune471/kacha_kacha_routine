@@ -78,3 +78,5 @@ gem "faker", "~> 3.8", groups: [ :development, :test ]
 gem "omniauth-google-oauth2", "~> 1.1.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "jwt", "~> 2.7"
+
+gem "ransack", "~> 4.4"

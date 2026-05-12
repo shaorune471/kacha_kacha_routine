@@ -12,12 +12,12 @@ RSpec.describe Habit, type: :model do
       expect(habit).not_to be_valid
     end
 
-    it "最低ラインが必須" do
+    it "最低目標が必須" do
       habit = build(:habit, minimum_goal: nil)
       expect(habit).not_to be_valid
     end
 
-    it "タイトル・習慣内容・最低ラインが必須" do
+    it "タイトル・習慣内容・最低目標が必須" do
       habit = build(:habit)
       expect(habit).to be_valid
     end
@@ -61,7 +61,7 @@ RSpec.describe Habit, type: :model do
       expect(habit.total_points).to eq(1)
     end
 
-    it "最低ライン達成で+1ptを返す" do
+    it "最低目標達成で+1ptを返す" do
       create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :minimum_achieved)
       expect(habit.total_points).to eq(1)
     end

@@ -48,4 +48,25 @@ RSpec.describe "習慣管理", type: :system do
       expect(page).to have_content "習慣を削除しました"
     end
   end
+
+  describe "習慣の検索" do
+    let!(:habit1) { create(:habit, user: user, title: "毎日読書する", content: "本を読む") }
+    let!(:habit2) { create(:habit, user: user, title: "朝のストレッチ", content: "体を動かす") }
+
+    it "タイトルで検索できる" do
+      visit home_path
+      fill_in "q[title_or_content_cont]", with: "読書"
+      click_button "検索"
+      expect(page).to have_content "毎日読書する"
+      expect(page).not_to have_content "朝のストレッチ"
+    end
+
+    it "内容で検索できる" do
+      visit home_path
+      fill_in "q[title_or_content_cont]", with: "体を動かす"
+      click_button "検索"
+      expect(page).to have_content "朝のストレッチ"
+      expect(page).not_to have_content "毎日読書する"
+    end
+  end
 end
