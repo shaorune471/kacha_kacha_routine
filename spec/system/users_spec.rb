@@ -18,8 +18,7 @@ RSpec.describe "ユーザー認証", type: :system do
     let(:user) { create(:user) }
 
     it "正常にログインできる" do
-      visit root_path
-      click_link "ログイン"
+      visit new_user_session_path
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "password"
       click_button "ログイン"
@@ -27,8 +26,7 @@ RSpec.describe "ユーザー認証", type: :system do
     end
 
     it "誤ったパスワードではログインできない" do
-      visit root_path
-      click_link "ログイン"
+      visit new_user_session_path
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "wrongpassword"
       click_button "ログイン"
