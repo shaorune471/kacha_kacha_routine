@@ -35,6 +35,9 @@ ja:
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
       already_authenticated: "すでにログインしています。"
       unauthenticated: "ログインしてください。"
+    omniauth_callbacks:
+      success: "%{kind}アカウントでログインしました。"
+      failure: "Google認証に失敗しました。"
   enums:
     habit_check:
       evaluation:
