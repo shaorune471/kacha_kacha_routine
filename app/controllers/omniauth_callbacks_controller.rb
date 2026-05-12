@@ -9,11 +9,18 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       return
     end
 
+    is_new_user = !User.exists?(provider: auth.provider, uid: auth.uid)
     @user = User.from_omniauth(auth)
 
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
+      sign_in @user, event: :authentication
       set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
+      if is_new_user
+        session[:onboarding] = true
+        redirect_to guide_path
+      else
+        redirect_to home_path
+      end
     else
       session["devise.google_data"] = auth.except(:extra)
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
@@ -21,10 +28,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    if params[:error] == "access_denied"
-      redirect_to root_path, alert: "Google認証がキャンセルされました。"
-    else
-      redirect_to root_path, alert: "Google認証に失敗しました。"
-    end
+    redirect_to root_path, alert: "Google認証に失敗しました。"
   end
 end
