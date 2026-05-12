@@ -21,6 +21,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path, alert: "Google認証に失敗しました。"
+    if params[:error] == "access_denied"
+      redirect_to root_path, alert: "Google認証がキャンセルされました。"
+    else
+      redirect_to root_path, alert: "Google認証に失敗しました。"
+    end
   end
 end

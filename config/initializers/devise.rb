@@ -282,7 +282,8 @@ Devise.setup do |config|
     scope: "email, profile",
     provider_ignores_state: true,
     skip_jwt: true,
-    access_type: "online"
+    access_type: "online",
+    prompt: "select_account"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
