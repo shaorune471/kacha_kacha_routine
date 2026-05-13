@@ -1,0 +1,5 @@
+<% @habits.each do |habit| %>
+  <li role="option" data-autocomplete-value="<%= habit.title %>">
+    <%= habit.title %>
+  </li>
+<% end %>

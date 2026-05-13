@@ -37,11 +37,17 @@
     </div>
 
     <%= search_form_for @q, url: home_path, method: :get, class: "mb-4" do |f| %>
-      <div class="flex gap-2">
-        <%= f.search_field :title_or_content_cont,
-            placeholder: "習慣タイトルや内容で検索",
-            class: "input input-bordered flex-1 input-sm" %>
-        <%= f.submit "検索", class: "btn btn-outline btn-sm" %>
+      <div data-controller="autocomplete"
+          data-autocomplete-url-value="<%= autocomplete_home_path %>">
+        <div class="flex gap-2">
+          <%= f.search_field :title_or_content_cont,
+              placeholder: "習慣タイトルや内容で検索",
+              class: "input input-bordered flex-1 input-sm",
+              data: { autocomplete_target: "input" } %>
+          <%= f.submit "検索", class: "btn btn-outline btn-sm" %>
+        </div>
+        <ul data-autocomplete-target="results"
+            class="bg-base-100 border border-base-200 rounded-lg mt-1"></ul>
       </div>
     <% end %>
 

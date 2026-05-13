@@ -69,4 +69,15 @@ RSpec.describe "習慣管理", type: :system do
       expect(page).not_to have_content "毎日読書する"
     end
   end
+
+  describe "オートコンプリート" do
+    let!(:habit1) { create(:habit, user: user, title: "毎日読書する", content: "本を読む") }
+    let!(:habit2) { create(:habit, user: user, title: "朝のストレッチ", content: "体を動かす") }
+
+    it "入力した文字に合う候補が表示される" do
+      visit home_path
+      fill_in "q[title_or_content_cont]", with: "読書"
+      expect(page).to have_content "毎日読書する"
+    end
+  end
 end

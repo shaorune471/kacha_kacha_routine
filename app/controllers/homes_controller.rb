@@ -9,4 +9,12 @@ class HomesController < ApplicationController
     @checked_today_count = @all_habits.count(&:checked_today?)
     @show_reframing_banner = Date.today.sunday?
   end
+
+  def autocomplete
+    @habits = Habit.ransack(title_cont: params[:q])
+      .result(distinct: true)
+      .where(user: current_user)
+      .limit(5)
+    render layout: false
+  end
 end
