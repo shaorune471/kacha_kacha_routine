@@ -1,0 +1,17 @@
+<%= @user.name %>さん、こんにちは。HabitRestepsです。
+
+今日の習慣チェックはお済みですか？
+
+<% if @unchecked_habits.any? %>
+以下の習慣がまだチェックされていません。
+<% @unchecked_habits.each do |habit| %>
+・<%= habit.title %>（最低目標：<%= habit.minimum_goal %>）
+<% end %>
+<% end %>
+
+最低目標だけでも大丈夫です。小さな一歩を踏み出しましょう。
+
+今日の習慣をチェックする
+<%= home_url %>
+
+HabitResteps
