@@ -36,7 +36,7 @@ RSpec.describe Habit, type: :model do
     end
   end
 
-  describe "#checked_today?" do
+  describe "習慣チェックの判定" do
     let(:habit) { create(:habit) }
 
     it "今日チェック済みの場合はtrueを返す" do
@@ -49,7 +49,7 @@ RSpec.describe Habit, type: :model do
     end
   end
 
-  describe "#total_points" do
+  describe "習慣ポイントの計算" do
     let(:habit) { create(:habit) }
 
     it "チェックがない場合は0を返す" do
@@ -77,6 +77,29 @@ RSpec.describe Habit, type: :model do
       create(:habit_check, habit: habit, checked_on: Date.today - 2, evaluation: :room_for_growth)
       create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
       expect(habit.total_points).to eq(3)
+    end
+  end
+
+  describe "習慣数の上限" do
+    let(:user) { create(:user, habit_limit: true) }
+
+    it "上限以下であれば登録できる" do
+      create_list(:habit, Habit::HABIT_LIMIT - 1, user: user)
+      habit = build(:habit, user: user)
+      expect(habit).to be_valid
+    end
+
+    it "上限を超えると登録できない" do
+      create_list(:habit, Habit::HABIT_LIMIT, user: user)
+      habit = build(:habit, user: user)
+      expect(habit).not_to be_valid
+    end
+
+    it "上限なしの場合は上限を超えても登録できる" do
+      user.update(habit_limit: false)
+      create_list(:habit, Habit::HABIT_LIMIT, user: user)
+      habit = build(:habit, user: user)
+      expect(habit).to be_valid
     end
   end
 end

@@ -3,6 +3,7 @@ namespace :habit_reminder do
   task send_emails: :environment do
     User.find_each do |user|
       next if user.habits.empty?
+      next unless user.reminder_notification?
       next if user.habits.all?(&:checked_today?)
 
       HabitReminderMailer.reminder_email(user).deliver_now

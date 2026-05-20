@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="<%= user_signed_in? && current_user.dark_mode? ? "dark" : "emerald" %>">
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "HabitResteps" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -36,7 +36,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col"
+        data-controller="theme"
+        data-current-theme="<%= user_signed_in? && current_user.dark_mode? ? "dark" : "emerald" %>">
     <% if content_for?(:header) %>
       <%= yield :header %>
     <% else %>

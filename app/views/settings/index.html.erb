@@ -1,0 +1,75 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">設定</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto space-y-4">
+
+    <%= form_with model: current_user, url: settings_path, method: :patch do |f| %>
+
+      <%# 習慣数の上限 %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-5">
+          <p class="text-sm font-medium mb-3">習慣数の上限</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-base-content/70">上限あり（<%= Habit::HABIT_LIMIT %>個まで）</p>
+              <p class="text-xs text-base-content/50">完璧主義者は習慣を詰め込みすぎる傾向があります</p>
+            </div>
+            <%= f.check_box :habit_limit, class: "toggle toggle-primary", checked: current_user.habit_limit? %>
+          </div>
+        </div>
+      </div>
+
+      <%# 通知設定 %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-5">
+          <p class="text-sm font-medium mb-3">通知設定</p>
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="text-sm text-base-content/70">再開サポートメール</p>
+              <p class="text-xs text-base-content/50">2週間チェックがない場合にメールを送信します</p>
+            </div>
+            <%= f.check_box :reengagement_notification, class: "toggle toggle-primary", checked: current_user.reengagement_notification? %>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-base-content/70">習慣リマインダーメール</p>
+              <p class="text-xs text-base-content/50">毎日22時に未チェックの習慣をお知らせします</p>
+            </div>
+            <%= f.check_box :reminder_notification, class: "toggle toggle-primary", checked: current_user.reminder_notification? %>
+          </div>
+        </div>
+      </div>
+
+      <%# ダークモード %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-5">
+          <p class="text-sm font-medium mb-3">表示設定</p>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-base-content/70">ダークモード</p>
+              <p class="text-xs text-base-content/50">画面を暗いテーマに切り替えます</p>
+            </div>
+            <%= f.check_box :dark_mode, class: "toggle toggle-primary", checked: current_user.dark_mode? %>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit "設定を保存", class: "btn btn-primary w-full" %>
+
+    <% end %>
+
+    <%# ログアウト %>
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline w-full" %>
+      </div>
+    </div>
+
+  </div>
+</div>

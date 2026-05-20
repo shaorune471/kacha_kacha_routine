@@ -1,14 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: emerald --default;
+  themes: emerald --default, dark;
 }
-
 [data-autocomplete-target="results"] li {
   padding: 8px 12px;
   font-size: 14px;
   cursor: pointer;
 }
-
 [data-autocomplete-target="results"] li:hover,
 [data-autocomplete-target="results"] li[aria-selected="true"] {
   background-color: oklch(var(--b2));

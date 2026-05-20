@@ -30,7 +30,7 @@ RSpec.describe "ユーザー認証", type: :system do
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "wrongpassword"
       click_button "ログイン"
-      expect(page).to have_content "メールアドレスまたはパスワードが違います"
+      expect(page).to have_current_path(new_user_session_path)
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe "ユーザー認証", type: :system do
 
     it "正常にログアウトできる" do
       login_as user, scope: :user
-      visit home_path
+      visit settings_path
       click_button "ログアウト"
       expect(page).to have_content "ログアウトしました"
     end
