@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_11_112534) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_19_004246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_11_112534) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.boolean "habit_limit", default: true, null: false
+    t.boolean "reengagement_notification", default: true, null: false
+    t.boolean "reminder_notification", default: true, null: false
+    t.boolean "dark_mode", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

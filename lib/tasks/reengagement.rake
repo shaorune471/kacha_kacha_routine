@@ -5,6 +5,7 @@ namespace :reengagement do
 
     User.find_each do |user|
       next if user.habits.empty?
+      next unless user.reengagement_notification?
 
       latest_check = HabitCheck
         .joins(:habit)

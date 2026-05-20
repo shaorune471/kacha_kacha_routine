@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "privacy", to: "pages#privacy"
   get "contact", to: "contacts#new"
   post "contact", to: "contacts#create"
+  get "settings", to: "settings#index"
+  patch "settings", to: "settings#update"
 
   resources :habits do
     resources :habit_checks, only: [ :new, :create, :edit, :update ]

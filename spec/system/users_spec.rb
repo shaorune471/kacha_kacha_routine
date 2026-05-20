@@ -39,7 +39,7 @@ RSpec.describe "ユーザー認証", type: :system do
 
     it "正常にログアウトできる" do
       login_as user, scope: :user
-      visit home_path
+      visit settings_path
       click_button "ログアウト"
       expect(page).to have_content "ログアウトしました"
     end

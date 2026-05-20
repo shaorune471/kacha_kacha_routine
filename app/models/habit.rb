@@ -7,6 +7,10 @@ class Habit < ApplicationRecord
   validates :minimum_goal, presence: true
 
   validate :minimum_goal_validates
+  validate :habits_count_limit, on: :create
+
+  HABIT_LIMIT = 10
+
 
   def checked_today?
     habit_checks.exists?(checked_on: Date.today)
@@ -72,6 +76,13 @@ class Habit < ApplicationRecord
   def minimum_goal_validates
     if content.present? && minimum_goal.present? && content == minimum_goal
       errors.add(:minimum_goal, "は習慣内容と違う内容にしてください")
+    end
+  end
+
+  def habits_count_limit
+    return unless user.habit_limit?
+    if user.habits.count >= HABIT_LIMIT
+      errors.add(:base, "習慣の登録は#{HABIT_LIMIT}個までです。今登録している習慣を優先しましょう。")
     end
   end
 end
