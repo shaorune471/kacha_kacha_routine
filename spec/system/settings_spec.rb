@@ -23,4 +23,12 @@ RSpec.describe "設定", type: :system do
     click_button "ログアウト"
     expect(page).to have_content "ログアウトしました"
   end
+
+  it "振り返りの開始曜日を変更できる" do
+    visit settings_path
+    select "日曜日", from: "user[review_start_day]"
+    click_button "設定を保存"
+    expect(page).to have_content "設定を更新しました"
+    expect(user.reload.review_start_day).to eq(0)
+  end
 end

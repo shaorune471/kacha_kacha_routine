@@ -32,7 +32,7 @@
         </div>
       </div>
     <% else %>
-      <% @habit_checks.group_by { |hc| hc.checked_on.beginning_of_week }.each do |week_start, checks| %>
+      <% @habit_checks.group_by { |hc| hc.checked_on.beginning_of_week(Date::DAYS_INTO_WEEK.key(@review_start_day)) }.each do |week_start, checks| %>
         <div class="card bg-base-100 border border-base-200">
           <div class="card-body p-5">
             <div class="flex items-center justify-between mb-3">

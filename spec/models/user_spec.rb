@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#total_experience" do
+  describe "習慣ポイントの計算" do
     it "全ての習慣ポイントの合計を返す" do
       user = create(:user)
       habit1 = create(:habit, user: user)
@@ -22,6 +22,13 @@ RSpec.describe User, type: :model do
       create(:habit_check, habit: habit1, checked_on: Date.today - 1, evaluation: :all_achieved)
       create(:habit_check, habit: habit2, checked_on: Date.today - 1, evaluation: :minimum_achieved)
       expect(user.total_experience).to eq(2)
+    end
+  end
+
+  describe "振り返りの開始曜日" do
+    it "デフォルトは月曜日（1）である" do
+      user = create(:user)
+      expect(user.review_start_day).to eq(1)
     end
   end
 end
