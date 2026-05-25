@@ -15,6 +15,6 @@ class SettingsController < ApplicationController
   private
 
   def settings_params
-    params.require(:user).permit(:habit_limit, :reengagement_notification, :reminder_notification, :dark_mode)
+    params.require(:user).permit(:habit_limit, :reengagement_notification, :reminder_notification, :dark_mode, :review_start_day)
   end
 end
