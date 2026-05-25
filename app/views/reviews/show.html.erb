@@ -14,9 +14,9 @@
       <div class="card-body p-5">
         <p class="text-xs font-medium uppercase tracking-widest mb-3">振り返りのアドバイス</p>
         <ul class="space-y-2">
-          <li class="text-sm font-medium">・一日の予定に余裕はありますか？</li>
-          <li class="text-sm font-medium">・もっと簡略化して最低限にできそうですか？一分でも大丈夫！</li>
-          <li class="text-sm font-medium">・例外が起きた時はどうしますか？</li>
+          <% @advices.each do |advice| %>
+            <li class="text-sm font-medium">・<%= advice %></li>
+          <% end %>
         </ul>
       </div>
     </div>
