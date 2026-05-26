@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "contact", to: "contacts#create"
   get "settings", to: "settings#index"
   patch "settings", to: "settings#update"
+  get "calendar", to: "calendars#index"
 
   resources :habits do
     resources :habit_checks, only: [ :new, :create, :edit, :update ]

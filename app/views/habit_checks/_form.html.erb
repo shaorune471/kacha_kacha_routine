@@ -17,7 +17,7 @@
         <span class="text-sm">全ての習慣を達成</span>
       </label>
       <label class="flex items-center gap-3 cursor-pointer">
-        <%= f.radio_button :evaluation, :minimum_achieved, class: "radio radio-primary" %>
+        <%= f.radio_button :evaluation, :minimum_achieved, class: "radio radio-info" %>
         <span class="text-sm">最低目標を達成</span>
       </label>
       <label class="flex items-center gap-3 cursor-pointer">
@@ -46,5 +46,9 @@
     <%= f.text_area :memo, rows: 3, class: "textarea textarea-bordered w-full" %>
   </div>
 
+  <%= f.hidden_field :checked_on, value: habit_check.checked_on %>
+  <% if params[:from] %>
+    <%= hidden_field_tag :from, params[:from] %>
+  <% end %>
   <%= f.submit habit_check.new_record? ? "登録" : "更新", class: "btn btn-primary w-full" %>
 <% end %>

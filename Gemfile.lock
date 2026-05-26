@@ -381,6 +381,8 @@ GEM
       websocket (~> 1.0)
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
+    simple_calendar (3.1.0)
+      rails (>= 6.1)
     snaky_hash (2.0.3)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
@@ -473,6 +475,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   selenium-webdriver (~> 4.27.0)
   sendgrid-ruby (~> 6.7)
+  simple_calendar (~> 3.1)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 4.4)

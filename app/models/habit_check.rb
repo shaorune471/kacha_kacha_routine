@@ -15,4 +15,8 @@ class HabitCheck < ApplicationRecord
       "room_for_growth" => "伸びしろあり"
     }[evaluation]
   end
+
+  def start_time
+    checked_on.to_time
+  end
 end

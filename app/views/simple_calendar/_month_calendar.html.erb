@@ -1,0 +1,24 @@
+<div class="simple-calendar">
+  <%# 月ナビゲーション %>
+  <div class="flex items-center justify-between mb-4">
+    <%= link_to "前月", calendar.url_for_previous_view, class: "btn btn-outline btn-sm" %>
+    <span class="text-sm font-medium"><%= start_date.strftime("%Y年%m月") %></span>
+    <%= link_to "次月", calendar.url_for_next_view, class: "btn btn-outline btn-sm" %>
+  </div>
+
+  <%# 曜日ヘッダー %>
+  <div class="grid grid-cols-7 gap-1 mb-2">
+    <% date_range.first(7).each do |day| %>
+      <div class="text-center text-xs text-base-content/50 font-medium py-1">
+        <%= %w[日 月 火 水 木 金 土][day.wday] %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# カレンダーグリッド %>
+  <div class="grid grid-cols-7 gap-1">
+    <% date_range.each do |day| %>
+      <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+    <% end %>
+  </div>
+</div>

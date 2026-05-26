@@ -78,6 +78,12 @@ RSpec.describe Habit, type: :model do
       create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
       expect(habit.total_points).to eq(3)
     end
+
+    it "前回チェックから2日以上経過した場合は+2ptを返す" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 3, evaluation: :all_achieved)
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
+      expect(habit.total_points).to eq(3)
+    end
   end
 
   describe "習慣数の上限" do

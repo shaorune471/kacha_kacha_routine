@@ -23,12 +23,16 @@ class Habit < ApplicationRecord
 
     sorted_checks.each_with_index do |check, i|
       next unless achieved?(check)
+      prev_check = sorted_checks[i - 1]
 
-      # 全て・最低目標達成で+1pt、前回の習慣チェックが未達成で+2pt（初日は1pt固定）
-      if i == 0 || achieved?(sorted_checks[i - 1])
+      if i == 0
+        # 初日は1pt固定
         score += 1
-      else
+      elsif !achieved?(prev_check) || (check.checked_on - prev_check.checked_on) > 1
+        # 前回チェックが未達成、または前回チェックから2日以上経過した場合は+2pt
         score += 2
+      else
+        score += 1
       end
     end
 
@@ -47,12 +51,16 @@ class Habit < ApplicationRecord
       # 達成した日の前回の習慣チェックを取得
       prev_check = sorted_checks.select { |hc| hc.checked_on < check.checked_on }.last
 
-      # 前回の習慣チェックがない（初日）または達成していれば+1pt
-      # 週の初日でも再開で+2ptになる場合がある
-      if prev_check.nil? || achieved?(prev_check)
+      if prev_check.nil?
+        # 前回のチェックがない（初日）
         score += 1
-      else
+      elsif !achieved?(prev_check) || (check.checked_on - prev_check.checked_on) > 1
+        # 前回のチェックが未達成または前回チェックから2日以上経過した場合は+2pt
+        # 週の初日でも再開で+2ptになる場合がある
         score += 2
+      else
+        # 前回のチェックが達成
+        score += 1
       end
     end
 

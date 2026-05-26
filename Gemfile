@@ -80,3 +80,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "jwt", "~> 2.7"
 
 gem "ransack", "~> 4.4"
+
+gem "simple_calendar", "~> 3.1"

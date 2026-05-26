@@ -1,7 +1,7 @@
 <% content_for :header do %>
   <nav class="navbar bg-base-100 border-b border-base-200">
     <div class="max-w-xl mx-auto w-full flex justify-center">
-      <span class="text-lg font-medium">習慣チェック　<%= Date.today.strftime("%Y年%m月%d日") %></span>
+      <span class="text-lg font-medium">習慣チェック　<%= @date.strftime("%Y年%m月%d日") %></span>
     </div>
   </nav>
 <% end %>
