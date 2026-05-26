@@ -1,0 +1,102 @@
+<% content_for :header do %>
+  <nav class="navbar bg-base-100 border-b border-base-200">
+    <div class="max-w-xl mx-auto w-full flex justify-center">
+      <span class="text-lg font-medium">カレンダー</span>
+    </div>
+  </nav>
+<% end %>
+
+<div class="px-6 py-8 bg-base-200 min-h-screen">
+  <div class="max-w-xl mx-auto space-y-4">
+
+    <%# 習慣選択 %>
+    <% if @habits.empty? %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-6 text-center">
+          <p class="text-sm text-base-content/60">習慣がまだ登録されていません。</p>
+          <%= link_to "最初の習慣を登録する", new_habit_path, class: "btn btn-primary btn-sm mt-3" %>
+        </div>
+      </div>
+    <% else %>
+      <%= form_with url: calendar_path, method: :get, data: { turbo_frame: "_top" } do |f| %>
+        <div class="flex gap-2">
+          <%= f.select :habit_id,
+              @habits.map { |h| [h.title, h.id] },
+              { selected: @habit&.id },
+              class: "select select-bordered flex-1",
+              onchange: "this.form.submit()" %>
+          <%= f.hidden_field :year, value: @year %>
+          <%= f.hidden_field :month, value: @month %>
+        </div>
+      <% end %>
+
+      <%# カレンダー %>
+      <% if @habit %>
+        <div class="card bg-base-100 border border-base-200">
+          <div class="card-body p-5">
+
+            <%= month_calendar(events: @habit_checks&.values&.flatten || []) do |date, checks| %>
+              <%
+                check = checks.first
+                is_reopen = @reopen_dates&.include?(date)
+                bg_class = if check.nil?
+                  "bg-base-200"
+                elsif check.all_achieved?
+                  "bg-success/30"
+                elsif check.minimum_achieved?
+                  "bg-info/30"
+                elsif check.exception?
+                  "bg-warning/30"
+                else
+                  "bg-base-300"
+                end
+                today_class = date == Date.today ? "ring-2 ring-primary" : ""
+                reopen_class = is_reopen ? "ring-2 ring-warning" : ""
+                is_future = date > Date.today
+              %>
+              <% if is_future %>
+                <div class="aspect-square rounded-md <%= bg_class %> flex items-center justify-center">
+                  <span class="text-xs text-base-content/30"><%= date.day %></span>
+                </div>
+              <% elsif check %>
+                <%= link_to edit_habit_habit_check_path(@habit, check, from: "calendar"), class: "aspect-square rounded-md #{bg_class} #{today_class} #{reopen_class} flex items-center justify-center block" do %>
+                  <span class="text-xs font-medium"><%= date.day %></span>
+                <% end %>
+              <% else %>
+                <%= link_to new_habit_habit_check_path(@habit, date: date, from: "calendar"), class: "aspect-square rounded-md #{bg_class} #{today_class} flex items-center justify-center block" do %>
+                  <span class="text-xs text-base-content/50"><%= date.day %></span>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <%# 凡例 %>
+            <div class="flex flex-wrap gap-3 mt-4">
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 rounded bg-success/30"></div>
+                <span class="text-xs text-base-content/60">全て達成</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 rounded bg-info/30"></div>
+                <span class="text-xs text-base-content/60">最低目標達成</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 rounded bg-warning/30"></div>
+                <span class="text-xs text-base-content/60">例外で未達成</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 rounded bg-base-300"></div>
+                <span class="text-xs text-base-content/60">伸びしろあり</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="w-3 h-3 rounded ring-2 ring-warning"></div>
+                <span class="text-xs text-base-content/60">再開（+2pt）</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
