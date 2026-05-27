@@ -80,4 +80,29 @@ RSpec.describe "習慣管理", type: :system do
       expect(page).to have_content "毎日読書する"
     end
   end
+
+  describe "ステータスフィルター" do
+    let!(:active_habit) { create(:habit, user: user, title: "継続中の習慣", status: :active) }
+    let!(:paused_habit) { create(:habit, user: user, title: "休止中の習慣", status: :paused) }
+    let!(:completed_habit) { create(:habit, user: user, title: "完了した習慣", status: :completed) }
+
+    it "デフォルトで継続中の習慣のみ表示される" do
+      visit home_path
+      expect(page).to have_content "継続中の習慣"
+      expect(page).not_to have_content "休止中の習慣"
+      expect(page).not_to have_content "完了した習慣"
+    end
+
+    it "休止中タブで休止中の習慣が表示される" do
+      visit home_path(status: "paused")
+      expect(page).to have_content "休止中の習慣"
+      expect(page).not_to have_content "継続中の習慣"
+    end
+
+    it "完了タブで完了した習慣が表示される" do
+      visit home_path(status: "completed")
+      expect(page).to have_content "完了した習慣"
+      expect(page).not_to have_content "継続中の習慣"
+    end
+  end
 end

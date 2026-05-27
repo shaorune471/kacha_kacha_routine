@@ -11,6 +11,7 @@ class Habit < ApplicationRecord
 
   HABIT_LIMIT = 10
 
+  enum :status, { active: 0, paused: 1, completed: 2 }
 
   def checked_today?
     habit_checks.exists?(checked_on: Date.today)

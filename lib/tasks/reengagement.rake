@@ -4,12 +4,12 @@ namespace :reengagement do
     two_weeks_ago = 14.days.ago.to_date
 
     User.find_each do |user|
-      next if user.habits.empty?
+      next if user.habits.where(status: :active).empty?
       next unless user.reengagement_notification?
 
       latest_check = HabitCheck
         .joins(:habit)
-        .where(habits: { user_id: user.id })
+        .where(habits: { user_id: user.id, status: :active })
         .maximum(:checked_on)
 
       next if latest_check.nil?

@@ -108,4 +108,11 @@ RSpec.describe Habit, type: :model do
       expect(habit).to be_valid
     end
   end
+
+  describe "ステータス" do
+    it "デフォルトは継続中（active）である" do
+      habit = create(:habit)
+      expect(habit.status).to eq("active")
+    end
+  end
 end
