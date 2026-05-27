@@ -29,6 +29,12 @@
             <p class="text-sm"><%= @habit.exception_rule %></p>
           </div>
         <% end %>
+        <% if @habit.goal_days.present? %>
+          <div>
+            <p class="text-xs text-base-content/60 mb-1">目標期間</p>
+            <p class="text-sm"><%= @habit.goal_days %>日</p>
+          </div>
+        <% end %>
         <div>
           <p class="text-xs text-base-content/60 mb-1">ステータス</p>
           <p class="text-sm"><%= I18n.t("enums.habit.status.#{@habit.status}") %></p>
