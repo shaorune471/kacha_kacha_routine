@@ -47,6 +47,6 @@ class HabitsController < ApplicationController
   end
 
   def habit_params
-    params.require(:habit).permit(:title, :content, :minimum_goal, :exception_rule)
+    params.require(:habit).permit(:title, :content, :minimum_goal, :exception_rule, :status)
   end
 end

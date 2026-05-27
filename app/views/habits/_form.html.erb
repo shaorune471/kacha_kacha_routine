@@ -29,5 +29,13 @@
     <%= f.text_field :exception_rule, class: "input input-bordered w-full" %>
   </div>
 
+  <div>
+    <%= f.label :status, "ステータス", class: "text-sm text-base-content/70 block mb-1" %>
+    <%= f.select :status,
+        Habit.statuses.keys.map { |s| [I18n.t("enums.habit.status.#{s}"), s] },
+        {},
+        class: "select select-bordered w-full" %>
+  </div>
+
   <%= f.submit habit.new_record? ? "登録" : "更新", class: "btn btn-primary w-full mt-2" %>
 <% end %>

@@ -36,6 +36,18 @@
       <%= link_to "習慣を登録", new_habit_path, class: "btn btn-primary btn-sm" %>
     </div>
 
+    <%# ステータスフィルター %>
+    <div class="flex gap-2 mb-3">
+      <% [["active", "継続中"], ["paused", "休止中"], ["completed", "完了"]].each do |status, label| %>
+        <%
+          selected = @selected_statuses.include?(status)
+          new_statuses = selected ? @selected_statuses - [status] : @selected_statuses + [status]
+          new_statuses = ["active"] if new_statuses.empty?
+        %>
+        <%= link_to label, home_path(status: new_statuses, q: params[:q]&.to_unsafe_h), class: "btn btn-sm #{selected ? 'btn-primary' : 'btn-outline'}" %>
+      <% end %>
+    </div>
+
     <%= search_form_for @q, url: home_path, method: :get, class: "mb-4" do |f| %>
       <div data-controller="autocomplete"
           data-autocomplete-url-value="<%= autocomplete_home_path %>">
@@ -49,6 +61,9 @@
         <ul data-autocomplete-target="results"
             class="bg-base-100 border border-base-200 rounded-lg mt-1"></ul>
       </div>
+      <% @selected_statuses.each do |status| %>
+        <%= hidden_field_tag "status[]", status %>
+      <% end %>
     <% end %>
 
     <% if @habits.empty? %>

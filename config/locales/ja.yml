@@ -39,6 +39,11 @@ ja:
       success: "%{kind}アカウントでログインしました。"
       failure: "Google認証に失敗しました。"
   enums:
+    habit:
+      status:
+        active: "継続中"
+        paused: "休止中"
+        completed: "完了"
     habit_check:
       evaluation:
         all_achieved: "全ての習慣を達成"
