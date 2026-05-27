@@ -115,4 +115,26 @@ RSpec.describe Habit, type: :model do
       expect(habit.status).to eq("active")
     end
   end
+
+  describe "目標期間の進捗率" do
+    let(:habit) { create(:habit, goal_days: 10) }
+
+    it "目標日数がない場合は0を返す" do
+      habit.update(goal_days: nil)
+      expect(habit.goal_progress_percentage).to eq(0)
+    end
+
+    it "習慣ポイントを元に進捗率を計算する" do
+      create(:habit_check, habit: habit, checked_on: Date.today - 1, evaluation: :all_achieved)
+      create(:habit_check, habit: habit, checked_on: Date.today, evaluation: :all_achieved)
+      expect(habit.goal_progress_percentage).to eq(20)
+    end
+
+    it "進捗率は100%を超えない" do
+      11.times do |i|
+        create(:habit_check, habit: habit, checked_on: Date.today - i, evaluation: :all_achieved)
+      end
+      expect(habit.goal_progress_percentage).to eq(100)
+    end
+  end
 end

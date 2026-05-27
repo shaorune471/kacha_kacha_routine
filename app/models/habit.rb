@@ -10,6 +10,13 @@ class Habit < ApplicationRecord
   validate :habits_count_limit, on: :create
 
   HABIT_LIMIT = 10
+  GOAL_DAYS_OPTIONS = [
+    [ "設定なし", nil ],
+    [ "1週間（7日）", 7 ],
+    [ "2週間（14日）", 14 ],
+    [ "1ヶ月（30日）", 30 ],
+    [ "66日", 66 ]
+  ].freeze
 
   enum :status, { active: 0, paused: 1, completed: 2 }
 
@@ -74,6 +81,15 @@ class Habit < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     []
+  end
+
+  def goal_start_date
+    habit_checks.order(:checked_on).first&.checked_on
+  end
+
+  def goal_progress_percentage
+    return 0 unless goal_days.present? && total_points > 0
+    [ (total_points.to_f / goal_days * 100).round, 100 ].min
   end
 
   private
