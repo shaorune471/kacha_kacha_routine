@@ -19,14 +19,22 @@
     <% end %>
 
     <%# 経験値・進捗 %>
-    <div class="grid grid-cols-2 gap-3 mb-6">
-      <div class="bg-base-100 rounded-xl p-4 border border-base-200">
-        <p class="text-xs text-base-content/60 mb-1">経験値</p>
-        <p class="text-xl font-medium"><%= @total_experience %> pt</p>
+    <div class="flex gap-3 mb-6">
+      <div class="bg-base-100 rounded-xl p-4 border border-base-200 w-28">
+        <p class="text-sm font-medium mb-1">今日の進捗</p>
+        <p class="text-lg font-medium"><%= @checked_today_count %> / <%= @all_habits.count %></p>
       </div>
-      <div class="bg-base-100 rounded-xl p-4 border border-base-200">
-        <p class="text-xs text-base-content/60 mb-1">今日の進捗</p>
-        <p class="text-xl font-medium"><%= @checked_today_count %> / <%= @all_habits.count %></p>
+      <div class="bg-base-100 rounded-xl p-4 border border-base-200 flex-1">
+        <p class="text-sm font-medium mb-1">Lv.<%= current_user.level_number %> <%= current_user.level_title %></p>
+        <p class="text-xs text-base-content/60 mb-2">経験値：<%= @total_experience %> ポイント</p>
+        <% if current_user.next_level %>
+          <div class="w-full bg-base-200 rounded-full h-1.5 mb-1">
+            <div class="bg-primary h-1.5 rounded-full" style="width: <%= current_user.level_progress_percentage %>%"></div>
+          </div>
+          <p class="text-xs text-base-content/50">次のレベルまで <%= current_user.next_level[:min] - @total_experience %> ポイント</p>
+        <% else %>
+          <p class="text-xs text-base-content/50">最高レベル到達！</p>
+        <% end %>
       </div>
     </div>
 
