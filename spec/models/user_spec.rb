@@ -31,4 +31,35 @@ RSpec.describe User, type: :model do
       expect(user.review_start_day).to eq(1)
     end
   end
+
+  describe "レベルアップ機能" do
+    let(:user) { create(:user) }
+
+    it "経験値0でレベル1かつ称号が正しい" do
+      expect(user.level_number).to eq(1)
+      expect(user.level_title).to eq("最初の一歩")
+    end
+
+    it "経験値10でレベル2かつ称号が正しい" do
+      allow(user).to receive(:total_experience).and_return(10)
+      expect(user.level_number).to eq(2)
+      expect(user.level_title).to eq("歩み始めた")
+    end
+
+    it "経験値140でレベル5かつ称号が正しい" do
+      allow(user).to receive(:total_experience).and_return(140)
+      expect(user.level_number).to eq(5)
+      expect(user.level_title).to eq("不屈の歩み")
+    end
+
+    it "レベル5では次のレベルがない" do
+      allow(user).to receive(:total_experience).and_return(140)
+      expect(user.next_level).to be_nil
+    end
+
+    it "進捗率が正しく計算される" do
+      allow(user).to receive(:total_experience).and_return(19)
+      expect(user.level_progress_percentage).to eq(47)
+    end
+  end
 end
