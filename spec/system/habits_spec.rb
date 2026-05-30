@@ -105,4 +105,14 @@ RSpec.describe "習慣管理", type: :system do
       expect(page).not_to have_content "継続中の習慣"
     end
   end
+
+  describe "テンプレートから習慣を登録する" do
+    it "テンプレートを選択するとフォームに自動入力される" do
+      visit new_habit_path
+      find("button", text: "テンプレートから選ぶ ※自動入力されます").click
+      find("button", text: "ストレッチ").click
+      expect(find("#habit_title").value).to eq("ストレッチ")
+      expect(find("#habit_minimum_goal").value).to eq("首のストレッチだけやる")
+    end
+  end
 end

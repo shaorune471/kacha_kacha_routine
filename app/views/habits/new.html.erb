@@ -7,7 +7,49 @@
 <% end %>
 
 <div class="px-6 py-8 bg-base-200 min-h-screen">
-  <div class="max-w-xl mx-auto">
+  <div class="max-w-xl mx-auto space-y-4">
+
+    <%# 登録フォーム %>
     <%= render "form", habit: @habit %>
+
+    <%# テンプレート選択 %>
+    <div class="card bg-base-100 border border-base-200" data-controller="collapse">
+      <div class="card-body p-5">
+        <button type="button"
+          class="flex items-center justify-between w-full"
+          data-action="click->collapse#toggle">
+          <p class="text-sm font-medium">テンプレートから選ぶ ※自動入力されます</p>
+          <span data-collapse-target="icon" class="text-base-content/60">▼</span>
+        </button>
+        <div data-collapse-target="content" class="hidden mt-3">
+          <% HABIT_TEMPLATES.each do |category| %>
+            <p class="text-xs text-base-content/60 mb-2"><%= category[:category] %></p>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <% category[:templates].each do |template| %>
+                <button type="button"
+                  class="btn btn-outline btn-sm"
+                  data-template-title="<%= template[:title] %>"
+                  data-template-content="<%= template[:content] %>"
+                  data-template-minimum-goal="<%= template[:minimum_goal] %>"
+                  data-template-exception-rule="<%= template[:exception_rule] %>"
+                  onclick="applyTemplate(this)">
+                  <%= template[:title] %>
+                </button>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<script>
+  function applyTemplate(button) {
+    document.getElementById('habit_title').value = button.dataset.templateTitle;
+    document.getElementById('habit_content').value = button.dataset.templateContent;
+    document.getElementById('habit_minimum_goal').value = button.dataset.templateMinimumGoal;
+    document.getElementById('habit_exception_rule').value = button.dataset.templateExceptionRule;
+  }
+</script>
