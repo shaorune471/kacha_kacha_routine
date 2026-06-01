@@ -7,26 +7,33 @@
 <% end %>
 
 <div class="px-6 py-8 bg-base-200 min-h-screen">
-  <div class="max-w-xl mx-auto">
+  <div class="max-w-xl mx-auto space-y-6">
 
-    <% if @habits.empty? %>
+    <% if @active_habits.empty? && @paused_habits.empty? && @completed_habits.empty? %>
       <div class="card bg-base-100 border border-base-200">
         <div class="card-body p-6 text-center">
           <p class="text-sm text-base-content/60">習慣がまだ登録されていません。</p>
+          <%= link_to "最初の習慣を登録する", new_habit_path, class: "btn btn-primary btn-sm mt-3" %>
         </div>
       </div>
     <% else %>
-      <% @habits.each do |habit| %>
-        <%= link_to habit_review_path(habit, habit), class: "block mb-3" do %>
-          <div class="card bg-base-100 border border-base-200 hover:border-base-300">
-            <div class="card-body p-4">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium"><%= habit.title %></p>
-                <span class="text-xs text-base-content/60">習慣ポイント：<%= habit.total_points %></span>
+      <% [["継続中", @active_habits], ["休止中", @paused_habits], ["完了", @completed_habits]].each do |label, habits| %>
+        <% next if habits.empty? %>
+        <div>
+          <p class="text-xs font-medium text-base-content/50 uppercase tracking-widest mb-2"><%= label %></p>
+          <% habits.each do |habit| %>
+            <%= link_to habit_review_path(habit, habit), class: "block mb-3" do %>
+              <div class="card bg-base-100 border border-base-200 hover:border-base-300">
+                <div class="card-body p-4">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm font-medium"><%= habit.title %></p>
+                    <span class="text-xs text-base-content/60">習慣ポイント：<%= habit.total_points %></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        <% end %>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
 

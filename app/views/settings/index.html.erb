@@ -11,6 +11,54 @@
 
     <%= form_with model: current_user, url: settings_path, method: :patch do |f| %>
 
+      <% if current_user.errors.any? %>
+        <div class="alert alert-error">
+          <ul>
+            <% current_user.errors.full_messages.each do |message| %>
+              <li class="text-sm"><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%# プロフィール %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-5">
+          <p class="text-sm font-medium mb-3">プロフィール</p>
+          <div class="space-y-3">
+            <div>
+              <%= f.label :name, "名前", class: "text-sm text-base-content/70 block mb-1" %>
+              <%= f.text_field :name, class: "input input-bordered w-full" %>
+            </div>
+            <div>
+              <%= f.label :email, "メールアドレス", class: "text-sm text-base-content/70 block mb-1" %>
+              <%= f.email_field :email, class: "input input-bordered w-full" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%# パスワード変更 %>
+      <div class="card bg-base-100 border border-base-200">
+        <div class="card-body p-5">
+          <p class="text-sm font-medium mb-3">パスワード変更</p>
+          <div class="space-y-3">
+            <div>
+              <%= f.label :current_password, "現在のパスワード", class: "text-sm text-base-content/70 block mb-1" %>
+              <%= f.password_field :current_password, class: "input input-bordered w-full", autocomplete: "current-password" %>
+            </div>
+            <div>
+              <%= f.label :password, "新しいパスワード", class: "text-sm text-base-content/70 block mb-1" %>
+              <%= f.password_field :password, class: "input input-bordered w-full", autocomplete: "new-password" %>
+            </div>
+            <div>
+              <%= f.label :password_confirmation, "新しいパスワード確認", class: "text-sm text-base-content/70 block mb-1" %>
+              <%= f.password_field :password_confirmation, class: "input input-bordered w-full", autocomplete: "new-password" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <%# 習慣数の上限 %>
       <div class="card bg-base-100 border border-base-200">
         <div class="card-body p-5">

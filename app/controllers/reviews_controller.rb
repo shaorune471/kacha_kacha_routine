@@ -2,7 +2,9 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @habits = current_user.habits
+    @active_habits = current_user.habits.where(status: :active).order(id: :asc)
+    @paused_habits = current_user.habits.where(status: :paused).order(id: :asc)
+    @completed_habits = current_user.habits.where(status: :completed).order(id: :asc)
   end
 
   def show

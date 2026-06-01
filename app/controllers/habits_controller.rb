@@ -9,6 +9,7 @@ class HabitsController < ApplicationController
 
   def create
     @habit = current_user.habits.new(habit_params)
+    @habit.status = :active
     authorize @habit
     if @habit.save
       redirect_to habit_path(@habit), notice: "習慣を登録しました"

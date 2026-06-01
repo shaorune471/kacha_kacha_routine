@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_many :habits, dependent: :destroy
 
+  validates :name, presence: true
+
   DAYS_OF_WEEK = {
     0 => "日曜日",
     1 => "月曜日",
@@ -59,5 +61,16 @@ class User < ApplicationRecord
     exp_in_level = total_experience - current[:min]
     level_range = current[:max] - current[:min]
     [ (exp_in_level.to_f / level_range * 100).round, 100 ].min
+  end
+
+  def update_with_password_check(params)
+    if params[:password].present?
+      update_with_password(params)
+    else
+      params.delete(:current_password)
+      params.delete(:password)
+      params.delete(:password_confirmation)
+      update(params)
+    end
   end
 end

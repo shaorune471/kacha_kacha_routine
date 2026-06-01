@@ -1,4 +1,4 @@
-<%= form_with model: [@habit, habit_check], class: "space-y-4" do |f| %>
+<%= form_with model: [@habit, habit_check], class: "space-y-4", data: { controller: "habit-check" } do |f| %>
   <% if habit_check.errors.any? %>
     <div class="alert alert-error">
       <ul>
@@ -13,32 +13,33 @@
     <div class="card-body p-4 space-y-3">
       <p class="text-sm text-base-content/70">習慣の評価</p>
       <label class="flex items-center gap-3 cursor-pointer">
-        <%= f.radio_button :evaluation, :all_achieved, class: "radio radio-primary" %>
+        <%= f.radio_button :evaluation, :all_achieved, class: "radio radio-primary", data: { action: "change->habit-check#toggleExceptionFields" } %>
         <span class="text-sm">全ての習慣を達成</span>
       </label>
       <label class="flex items-center gap-3 cursor-pointer">
-        <%= f.radio_button :evaluation, :minimum_achieved, class: "radio radio-info" %>
+        <%= f.radio_button :evaluation, :minimum_achieved, class: "radio radio-info", data: { action: "change->habit-check#toggleExceptionFields" } %>
         <span class="text-sm">最低目標を達成</span>
       </label>
       <label class="flex items-center gap-3 cursor-pointer">
-        <%= f.radio_button :evaluation, :exception, class: "radio radio-warning" %>
+        <%= f.radio_button :evaluation, :exception, class: "radio radio-warning", data: { action: "change->habit-check#toggleExceptionFields" } %>
         <span class="text-sm">例外で未達成</span>
       </label>
       <label class="flex items-center gap-3 cursor-pointer">
-        <%= f.radio_button :evaluation, :room_for_growth, class: "radio" %>
+        <%= f.radio_button :evaluation, :room_for_growth, class: "radio", data: { action: "change->habit-check#toggleExceptionFields" } %>
         <span class="text-sm">伸びしろあり</span>
       </label>
     </div>
   </div>
 
-  <div>
-    <%= f.label :exception_content, "例外内容", class: "text-sm text-base-content/70 block mb-1" %>
-    <%= f.text_field :exception_content, class: "input input-bordered w-full" %>
-  </div>
-
-  <div>
-    <%= f.label :exception_condition, "例外条件", class: "text-sm text-base-content/70 block mb-1" %>
-    <%= f.text_field :exception_condition, class: "input input-bordered w-full" %>
+  <div data-habit-check-target="exceptionFields" class="hidden space-y-4">
+    <div>
+      <%= f.label :exception_content, "例外内容", class: "text-sm text-base-content/70 block mb-1" %>
+      <%= f.text_field :exception_content, class: "input input-bordered w-full" %>
+    </div>
+    <div>
+      <%= f.label :exception_condition, "例外条件", class: "text-sm text-base-content/70 block mb-1" %>
+      <%= f.text_field :exception_condition, class: "input input-bordered w-full" %>
+    </div>
   </div>
 
   <div>

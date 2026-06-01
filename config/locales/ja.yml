@@ -17,6 +17,7 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード確認"
         name: "名前"
+        current_password: "現在のパスワード"
       habit:
         title: "習慣タイトル"
         content: "習慣内容"
