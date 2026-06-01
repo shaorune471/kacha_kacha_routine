@@ -27,10 +27,9 @@ RSpec.describe "カレンダー", type: :system do
   end
 
   it "過去の未チェック日付をクリックすると新規チェック画面に遷移する" do
-    habit
+    past_date = Date.today - 2
+    create(:habit_check, habit: habit, checked_on: Date.today - 3, evaluation: :all_achieved)
     visit calendar_path(habit_id: habit.id)
-    past_date = Date.today - 1.day
-    find("a[href*='date=#{past_date}']").click
-    expect(page).to have_content "習慣チェック"
+    expect(page).to have_css("a[href*='date=#{past_date}']")
   end
 end

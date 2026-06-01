@@ -25,7 +25,7 @@
         <p class="text-lg font-medium"><%= @checked_today_count %> / <%= @all_habits.count %></p>
       </div>
       <div class="bg-base-100 rounded-xl p-4 border border-base-200 flex-1">
-        <p class="text-sm font-medium mb-1">Lv.<%= current_user.level_number %> <%= current_user.level_title %></p>
+        <p class="text-sm font-medium mb-1">レベル<%= current_user.level_number %> <%= current_user.level_title %></p>
         <p class="text-xs text-base-content/60 mb-2">経験値：<%= @total_experience %> ポイント</p>
         <% if current_user.next_level %>
           <div class="w-full bg-base-200 rounded-full h-1.5 mb-1">
@@ -38,24 +38,25 @@
       </div>
     </div>
 
-    <%# 習慣一覧 %>
+    <%# 習慣を登録ボタン %>
+    <%= link_to "習慣を登録", new_habit_path, class: "btn btn-primary w-full mb-3" %>
+
+    <%# 習慣一覧・ステータスフィルター %>
     <div class="flex items-center justify-between mb-3">
       <h2 class="text-base font-medium">習慣一覧</h2>
-      <%= link_to "習慣を登録", new_habit_path, class: "btn btn-primary btn-sm" %>
+      <div class="flex gap-1">
+        <% [["active", "継続中"], ["paused", "休止中"], ["completed", "完了"]].each do |status, label| %>
+          <%
+            selected = @selected_statuses.include?(status)
+            new_statuses = selected ? @selected_statuses - [status] : @selected_statuses + [status]
+            new_statuses = ["active"] if new_statuses.empty?
+          %>
+          <%= link_to label, home_path(status: new_statuses, q: params[:q]&.to_unsafe_h), class: "btn btn-sm #{selected ? 'btn-primary' : 'btn-outline'}" %>
+        <% end %>
+      </div>
     </div>
 
-    <%# ステータスフィルター %>
-    <div class="flex gap-2 mb-3">
-      <% [["active", "継続中"], ["paused", "休止中"], ["completed", "完了"]].each do |status, label| %>
-        <%
-          selected = @selected_statuses.include?(status)
-          new_statuses = selected ? @selected_statuses - [status] : @selected_statuses + [status]
-          new_statuses = ["active"] if new_statuses.empty?
-        %>
-        <%= link_to label, home_path(status: new_statuses, q: params[:q]&.to_unsafe_h), class: "btn btn-sm #{selected ? 'btn-primary' : 'btn-outline'}" %>
-      <% end %>
-    </div>
-
+    <%# 検索フォーム %>
     <%= search_form_for @q, url: home_path, method: :get, class: "mb-4" do |f| %>
       <div data-controller="autocomplete"
           data-autocomplete-url-value="<%= autocomplete_home_path %>">
@@ -64,7 +65,7 @@
               placeholder: "習慣タイトルや内容で検索",
               class: "input input-bordered flex-1 input-sm",
               data: { autocomplete_target: "input" } %>
-          <%= f.submit "検索", class: "btn btn-outline btn-sm" %>
+          <%= f.submit "検索", class: "btn btn-primary btn-sm" %>
         </div>
         <ul data-autocomplete-target="results"
             class="bg-base-100 border border-base-200 rounded-lg mt-1"></ul>

@@ -21,12 +21,16 @@
       <%= form_with url: calendar_path, method: :get, data: { turbo_frame: "_top" } do |f| %>
         <div class="flex gap-2">
           <%= f.select :habit_id,
-              @habits.map { |h| [h.title, h.id] },
-              { selected: @habit&.id },
-              class: "select select-bordered flex-1",
-              onchange: "this.form.submit()" %>
-          <%= f.hidden_field :year, value: @year %>
-          <%= f.hidden_field :month, value: @month %>
+            grouped_options_for_select([
+                ["継続中", @habits.where(status: :active).map { |h| [h.title, h.id] }],
+                ["休止中", @habits.where(status: :paused).map { |h| [h.title, h.id] }],
+                ["完了", @habits.where(status: :completed).map { |h| [h.title, h.id] }]
+              ].reject { |_, habits| habits.empty? },
+              @habit&.id
+            ),
+            {},
+            class: "select select-bordered flex-1",
+            onchange: "this.form.submit()" %>
         </div>
       <% end %>
 
@@ -35,7 +39,7 @@
         <div class="card bg-base-100 border border-base-200">
           <div class="card-body p-5">
 
-            <%= month_calendar(events: @habit_checks&.values&.flatten || []) do |date, checks| %>
+            <%= month_calendar(events: @habit_checks&.values&.flatten || [], first_check_date: @first_check_date) do |date, checks| %>
               <%
                 check = checks.first
                 is_reopen = @reopen_dates&.include?(date)
@@ -53,9 +57,14 @@
                 today_class = date == Date.today ? "ring-2 ring-primary" : ""
                 reopen_class = is_reopen ? "ring-2 ring-warning" : ""
                 is_future = date > Date.today
+                is_other_month = date.month != @current_month.month
+                is_before_first_check = date < @first_check_date
+                is_disabled = is_other_month || is_before_first_check || is_future
               %>
-              <% if is_future %>
-                <div class="aspect-square rounded-md <%= bg_class %> flex items-center justify-center">
+              <% if is_other_month %>
+                <div class="aspect-square"></div>
+              <% elsif is_disabled %>
+                <div class="aspect-square flex items-center justify-center">
                   <span class="text-xs text-base-content/30"><%= date.day %></span>
                 </div>
               <% elsif check %>
