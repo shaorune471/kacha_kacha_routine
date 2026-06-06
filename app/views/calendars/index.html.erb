@@ -32,6 +32,7 @@
             class: "select select-bordered flex-1",
             onchange: "this.form.submit()" %>
         </div>
+        <%= f.hidden_field :start_date, value: @current_month %>
       <% end %>
 
       <%# カレンダー %>
@@ -98,7 +99,7 @@
               </div>
               <div class="flex items-center gap-1">
                 <div class="w-3 h-3 rounded ring-2 ring-warning"></div>
-                <span class="text-xs text-base-content/60">再開（+2pt）</span>
+                <span class="text-xs text-base-content/60">再開ボーナス（+2pt）</span>
               </div>
             </div>
 

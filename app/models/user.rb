@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  # 設定画面の振り返り開始曜日で使用
   DAYS_OF_WEEK = {
     0 => "日曜日",
     1 => "月曜日",
@@ -16,6 +17,9 @@ class User < ApplicationRecord
     5 => "金曜日",
     6 => "土曜日"
   }
+
+  # アドバイスを週ごとにランダム表示するのに使用
+  WEEK_START_DAYS = %i[sunday monday tuesday wednesday thursday friday saturday].freeze
 
   LEVELS = [
     { min: 0,   max: 9,  level: 1, title: "最初の一歩" },
@@ -65,7 +69,15 @@ class User < ApplicationRecord
 
   def update_with_password_check(params)
     if params[:password].present?
-      update_with_password(params)
+      if provider? && !password_set?
+        # Googleアカウントで登録したユーザーが初めてパスワードを設定する場合
+        if update(params.except("current_password"))
+          update_column(:password_set, true)
+          true
+        end
+      else
+        update_with_password(params)
+      end
     else
       params.delete(:current_password)
       params.delete(:password)

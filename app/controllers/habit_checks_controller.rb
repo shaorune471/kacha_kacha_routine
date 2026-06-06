@@ -51,6 +51,10 @@ class HabitChecksController < ApplicationController
   end
 
   def after_save_path
-    params[:from] == "calendar" ? calendar_path(habit_id: @habit.id) : home_path
+    if params[:from] == "calendar"
+      calendar_path(habit_id: @habit.id, start_date: @habit_check.checked_on.beginning_of_month)
+    else
+      home_path
+    end
   end
 end
