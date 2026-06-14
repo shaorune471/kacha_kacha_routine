@@ -76,7 +76,7 @@ gem "factory_bot_rails", "~> 6.5", groups: [ :development, :test ]
 gem "faker", "~> 3.8", groups: [ :development, :test ]
 
 gem "omniauth-google-oauth2", "~> 1.1.1"
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-rails_csrf_protection", "~> 2.0"
 gem "jwt", "~> 2.7"
 
 gem "ransack", "~> 4.4"
