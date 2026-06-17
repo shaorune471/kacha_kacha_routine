@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     authorize @habit, policy_class: ReviewPolicy
     @habit_checks = @habit.habit_checks.order(checked_on: :desc)
     @review_start_day = current_user.review_start_day
-    week_seed = Date.today.beginning_of_week.to_time.to_i
+    week_seed = Date.today.beginning_of_week(User::WEEK_START_DAYS[@review_start_day]).to_time.to_i
     @advices = REVIEW_ADVICE.sample(3, random: Random.new(week_seed))
   end
 end

@@ -9,7 +9,7 @@ class Habit < ApplicationRecord
   validate :minimum_goal_validates
   validate :habits_count_limit, on: :create
 
-  HABIT_LIMIT = 10
+  HABIT_LIMIT = 5
   GOAL_DAYS_OPTIONS = [
     [ "設定なし", nil ],
     [ "1週間（7日）", 7 ],
@@ -106,8 +106,8 @@ class Habit < ApplicationRecord
 
   def habits_count_limit
     return unless user.habit_limit?
-    if user.habits.count >= HABIT_LIMIT
-      errors.add(:base, "習慣の登録は#{HABIT_LIMIT}個までです。今登録している習慣を優先しましょう。")
+    if user.habits.where(status: :active).count >= HABIT_LIMIT
+      errors.add(:base, "継続中の習慣は#{HABIT_LIMIT}個までです。今の習慣を優先しましょう。設定で変更もできます。")
     end
   end
 end

@@ -42,11 +42,14 @@
       <div class="card bg-base-100 border border-base-200">
         <div class="card-body p-5">
           <p class="text-sm font-medium mb-3">パスワード変更</p>
+          <p class="text-xs text-base-content/50 mb-3">変更しない場合は空白のままにしてください</p>
           <div class="space-y-3">
-            <div>
-              <%= f.label :current_password, "現在のパスワード", class: "text-sm text-base-content/70 block mb-1" %>
-              <%= f.password_field :current_password, class: "input input-bordered w-full", autocomplete: "current-password" %>
-            </div>
+            <% unless current_user.provider? && !current_user.password_set? %>
+              <div>
+                <%= f.label :current_password, "現在のパスワード", class: "text-sm text-base-content/70 block mb-1" %>
+                <%= f.password_field :current_password, class: "input input-bordered w-full", autocomplete: "current-password" %>
+              </div>
+            <% end %>
             <div>
               <%= f.label :password, "新しいパスワード", class: "text-sm text-base-content/70 block mb-1" %>
               <%= f.password_field :password, class: "input input-bordered w-full", autocomplete: "new-password" %>
@@ -104,7 +107,7 @@
                 {},
                 class: "select select-bordered w-full" %>
           </div>
-          <p class="text-xs text-base-content/50 mt-2">週の集計をどの曜日から始めるか設定します</p>
+          <p class="text-xs text-base-content/50 mt-2">振り返りの集計をどの曜日から始めるか設定します</p>
         </div>
       </div>
 

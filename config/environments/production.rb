@@ -84,6 +84,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV["APP_HOST"] }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: :plain,
+    user_name: "apikey",
+    password: ENV["SENDGRID_API_KEY"]
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
