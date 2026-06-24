@@ -112,18 +112,21 @@
       </div>
 
       <%# ダークモード %>
-      <div class="card bg-base-100 border border-base-200">
-        <div class="card-body p-5">
-          <p class="text-sm font-medium mb-3">表示設定</p>
-          <div class="flex items-center justify-between">
-            <div>
-              <p class="text-sm text-base-content/70">ダークモード</p>
-              <p class="text-xs text-base-content/50">画面を暗いテーマに切り替えます</p>
+      <%# 調整中のため、非表示 %>
+      <% if false %>
+        <div class="card bg-base-100 border border-base-200">
+          <div class="card-body p-5">
+            <p class="text-sm font-medium mb-3">表示設定</p>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-base-content/70">ダークモード</p>
+                <p class="text-xs text-base-content/50">画面を暗いテーマに切り替えます</p>
+              </div>
+              <%= f.check_box :dark_mode, class: "toggle toggle-primary", checked: current_user.dark_mode? %>
             </div>
-            <%= f.check_box :dark_mode, class: "toggle toggle-primary", checked: current_user.dark_mode? %>
           </div>
         </div>
-      </div>
+      <% end %>
 
       <%= f.submit "設定を保存", class: "btn btn-primary w-full" %>
 
