@@ -15,7 +15,11 @@ namespace :reengagement do
       next if latest_check.nil?
       next if latest_check > two_weeks_ago
 
-      ReengagementMailer.reengagement_email(user).deliver_now
+      begin
+        ReengagementMailer.reengagement_email(user).deliver_now
+      rescue => e
+        Rails.logger.error "HabitReminderMailer error for #{user.email}: #{e.message}"
+      end
     end
   end
 end

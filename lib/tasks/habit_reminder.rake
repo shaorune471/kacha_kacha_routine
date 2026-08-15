@@ -6,7 +6,11 @@ namespace :habit_reminder do
       next unless user.reminder_notification?
       next if user.habits.where(status: :active).all?(&:checked_today?)
 
-      HabitReminderMailer.reminder_email(user).deliver_now
+      begin
+        HabitReminderMailer.reminder_email(user).deliver_now
+      rescue => e
+        Rails.logger.error "HabitReminderMailer error for #{user.email}: #{e.message}"
+      end
     end
   end
 end
