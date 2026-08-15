@@ -82,3 +82,4 @@ gem "jwt", "~> 2.7"
 gem "ransack", "~> 4.4"
 
 gem "simple_calendar", "~> 3.1"
+gem "resend"

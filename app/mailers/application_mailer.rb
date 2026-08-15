@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV["CONTACT_MAIL_ADDRESS"]
+  default from: "HabitResteps <noreply@habit-resteps.com>"
   layout "mailer"
 end
