@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "contact", to: "contacts#create"
   get "settings", to: "settings#index"
   patch "settings", to: "settings#update"
+  delete "settings/delete_account", to: "settings#delete_account", as: :delete_account
   get "calendar", to: "calendars#index"
 
   resources :habits do

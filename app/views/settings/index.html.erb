@@ -139,5 +139,12 @@
       </div>
     </div>
 
+    <%# アカウント削除 %>
+    <div class="card bg-base-100 border border-base-200">
+      <div class="card-body p-5">
+        <%= button_to "アカウントを削除する", delete_account_path, method: :delete, class: "btn btn-outline btn-error w-full", data: { turbo_confirm: "本当にアカウントを削除しますか？この操作は取り消せません。" } %>
+      </div>
+    </div>
+
   </div>
 </div>

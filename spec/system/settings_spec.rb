@@ -70,4 +70,13 @@ RSpec.describe "設定", type: :system do
     click_button "設定を保存"
     expect(page).to have_content "設定を更新しました"
   end
+
+  it "アカウントを削除できる" do
+    visit settings_path
+    accept_confirm do
+      click_button "アカウントを削除する"
+    end
+    expect(page).to have_content "アカウントを削除しました"
+    expect(User.exists?(user.id)).to be_falsey
+  end
 end
