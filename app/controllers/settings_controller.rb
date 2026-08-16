@@ -13,6 +13,12 @@ class SettingsController < ApplicationController
     end
   end
 
+  def delete_account
+    current_user.destroy
+    reset_session
+    redirect_to root_path, notice: "アカウントを削除しました"
+  end
+
   private
 
   def settings_params
