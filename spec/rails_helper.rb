@@ -78,4 +78,10 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
   end
+
+  OmniAuth.config.test_mode = true
+
+  config.after(:each) do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+  end
 end
